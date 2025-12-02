@@ -1,19 +1,26 @@
 {
-	"name": "n8n-nodes-<...>",
+	"name": "n8n-nodes-twelve-data",
 	"version": "0.1.0",
-	"description": "",
+	"description": "n8n community node for Twelve Data API - Access financial market data for stocks, forex, crypto, ETFs, and more",
 	"license": "MIT",
-	"homepage": "",
+	"homepage": "https://github.com/yourusername/n8n-nodes-twelve-data",
 	"keywords": [
-		"n8n-community-node-package"
+		"n8n-community-node-package",
+		"n8n",
+		"twelve-data",
+		"financial-data",
+		"stocks",
+		"forex",
+		"crypto",
+		"market-data"
 	],
 	"author": {
-		"name": "",
-		"email": ""
+		"name": "Your Name",
+		"email": "your.email@example.com"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/<...>/n8n-nodes-<...>.git"
+		"url": "https://github.com/yourusername/n8n-nodes-twelve-data.git"
 	},
 	"scripts": {
 		"build": "n8n-node build",
@@ -31,22 +38,25 @@
 		"n8nNodesApiVersion": 1,
 		"strict": true,
 		"credentials": [
-			"dist/credentials/GithubIssuesApi.credentials.js",
-			"dist/credentials/GithubIssuesOAuth2Api.credentials.js"
+			"dist/credentials/TwelveDataApi.credentials.js"
 		],
 		"nodes": [
-			"dist/nodes/GithubIssues/GithubIssues.node.js",
-			"dist/nodes/Example/Example.node.js"
+			"dist/nodes/TwelveData/TwelveData.node.js"
 		]
 	},
 	"devDependencies": {
 		"@n8n/node-cli": "*",
-		"eslint": "9.32.0",
-		"prettier": "3.6.2",
-		"release-it": "^19.0.4",
-		"typescript": "5.9.2"
+		"eslint": "9.39.1",
+		"n8n-workflow": "^1.120.0",
+		"prettier": "3.7.3",
+		"release-it": "^19.0.6",
+		"typescript": "5.9.3"
 	},
 	"peerDependencies": {
 		"n8n-workflow": "*"
+	},
+	"dependencies": {
+		"@devlikeapro/n8n-openapi-node": "^0.1.4",
+		"form-data": "^4.0.5"
 	}
 }

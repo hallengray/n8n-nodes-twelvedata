@@ -1,0 +1,80 @@
+This is a custom n8n node for Twelve Data API.
+
+PROJECT CONTEXT:
+
+- Building an n8n community node (a plugin for n8n automation tool)
+
+- Target: Financial data API (stocks, forex, crypto)
+
+- Using TypeScript programming language
+
+- Auto-generating from OpenAPI specification
+
+
+
+CODING STANDARDS:
+
+- Use TypeScript strict mode (catch more errors)
+
+- Follow n8n node development guidelines
+
+- Use @devlikeapro/n8n-openapi-node for automatic generation
+
+- API documentation source: https://api.twelvedata.com/doc/swagger/openapi.json
+
+- Base code patterns on the GitHub Issues example in this repo
+
+
+
+WHEN I ASK FOR HELP:
+
+- Explain what the code does in simple terms
+
+- Point out where files should go
+
+- Help debug errors clearly
+
+- Suggest best practices for n8n nodes
+
+
+
+REMEMBER:
+
+- This is my first custom n8n node
+
+- Explain technical terms when you use them
+
+- Show me where to put files in the folder structure
+
+
+
+ENDPOINT TESTING & DOCUMENTATION:
+
+When I test an API endpoint and share the results with you:
+
+1. I will mention that I tested an endpoint (e.g., "I tested /quote endpoint")
+
+2. You should automatically document the test results in docs/OPENAPI_ANALYSIS.md
+
+3. Add the documentation to the "## Endpoint Testing Results" section
+
+4. Include in the documentation:
+   - Endpoint URL and HTTP method
+   - All parameters (required and optional) with descriptions
+   - Complete response example (actual JSON from the test)
+   - Response field explanations
+   - Notes about what works (stocks, forex, crypto, etc.)
+   - Response time if mentioned
+   - Error examples if encountered
+   - Use cases for the n8n node
+
+5. Format: Follow the same structure as the existing "/quote" endpoint documentation
+
+6. This documentation will be used later when building the n8n node to understand:
+   - Exact response structures
+   - What data to extract
+   - How to map fields correctly
+   - Error handling patterns
+
+IMPORTANT: When I say "I tested [endpoint]" or share curl results, immediately add it to docs/OPENAPI_ANALYSIS.md in the "Endpoint Testing Results" section.
+
