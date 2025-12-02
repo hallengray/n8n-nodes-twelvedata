@@ -164,6 +164,11 @@ Convert between any currency pairs.
 - **[Credentials Technical Docs](docs/CREDENTIALS.md)** - Authentication details
 - **[OpenAPI Analysis](docs/OPENAPI_ANALYSIS.md)** - Complete API endpoint reference
 
+#### Technical Decisions
+- **[Legacy Peer Dependencies Summary](docs/LEGACY-PEER-DEPS-SUMMARY.md)** - Quick overview (TL;DR)
+- **[ADR-001: Legacy Peer Dependencies](docs/ADR-001-LEGACY-PEER-DEPS.md)** - Full investigation and decision record
+- **[Dependency Removal Plan](docs/DEPENDENCY-REMOVAL-PLAN.md)** - Implementation guide
+
 ### External Links
 
 - **[Twelve Data Website](https://twelvedata.com)** - Sign up and get API key

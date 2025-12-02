@@ -1,7 +1,9 @@
 import {
-	IAuthenticateGeneric,
+	IAuthenticate,
+	ICredentialDataDecryptedObject,
 	ICredentialTestRequest,
 	ICredentialType,
+	IHttpRequestOptions,
 	INodeProperties,
 } from 'n8n-workflow';
 
@@ -32,33 +34,71 @@ export class TwelveDataApi implements ICredentialType {
 				{
 					name: 'Header (Recommended)',
 					value: 'header',
-					description: 'Send API key in Authorization header',
+					description: 'Sends API key in Authorization header (more secure, not visible in URL logs)',
 				},
 				{
 					name: 'Query Parameter',
 					value: 'queryString',
-					description: 'Send API key as URL query parameter',
+					description: 'Sends API key as query parameter in URL (simpler for testing)',
 				},
 			],
 			default: 'header',
-			description: 'Choose how to send the API key. Header method is recommended for security.',
+			required: true,
+			description: 'Choose how to send the API key to Twelve Data. Header method is recommended for production use.',
 		},
 	];
 
-	authenticate: IAuthenticateGeneric = {
-		type: 'generic',
-		properties: {
-			// Twelve Data API requires 'apikey' as a query parameter
-			// Always send it as query parameter to ensure it works
-			qs: {
-				apikey: '={{$credentials.apiKey}}',
-			},
-			// Optionally also send in Authorization header if user selected header method
-			// (Some users prefer header method for security, but query param is still required)
-			headers: {
-				Authorization: '={{$credentials.authMethod === "header" ? "apikey " + $credentials.apiKey : undefined}}',
-			},
-		},
+	/**
+	 * Authentication configuration that respects the selected authMethod
+	 * 
+	 * Behavior:
+	 * - When authMethod === 'header': Adds Authorization header with format "apikey YOUR_API_KEY"
+	 * - When authMethod === 'queryString': Adds apikey query parameter to URL
+	 * 
+	 * Only one method is used at a time based on the user's selection.
+	 * The API key is never sent via both methods simultaneously.
+	 * 
+	 * Validation:
+	 * - Throws an error if apiKey is missing or empty
+	 * - Ensures credentials are properly configured before making API requests
+	 * 
+	 * Implementation:
+	 * - Uses function-based authentication to dynamically inject actual credential values
+	 * - Receives decrypted credentials and modifies request options accordingly
+	 * - Returns modified request options with authentication added
+	 */
+	authenticate: IAuthenticate = async (
+		credentials: ICredentialDataDecryptedObject,
+		requestOptions: IHttpRequestOptions,
+	): Promise<IHttpRequestOptions> => {
+		// Validate that API key exists
+		if (!credentials.apiKey || typeof credentials.apiKey !== 'string') {
+			throw new Error(
+				'API Key is required. Please configure your Twelve Data API credentials with a valid API key.',
+			);
+		}
+
+		// Get the authentication method (default to 'header' if not specified)
+		const authMethod = (credentials.authMethod as string) || 'header';
+
+		// Clone request options to avoid mutating the original
+		const modifiedOptions = { ...requestOptions };
+
+		if (authMethod === 'queryString') {
+			// Query parameter method: add apikey to URL query string
+			modifiedOptions.qs = {
+				...modifiedOptions.qs,
+				apikey: credentials.apiKey,
+			};
+		} else {
+			// Header method (default): add Authorization header
+			modifiedOptions.headers = {
+				...modifiedOptions.headers,
+				Authorization: `apikey ${credentials.apiKey}`,
+			};
+		}
+
+		return modifiedOptions;
 	};
 
 	/**
@@ -67,23 +107,16 @@ export class TwelveDataApi implements ICredentialType {
 	 * 
 	 * How it works:
 	 * 1. Makes a GET request to /stocks endpoint (lightweight, doesn't require parameters)
-	 * 2. Uses the authentication method (header or query string) configured above
+	 * 2. The authenticate property automatically adds authentication based on selected authMethod:
+	 *    - Header method: Adds Authorization header with "apikey YOUR_KEY"
+	 *    - Query parameter method: Adds apikey query parameter to URL
 	 * 3. If successful (HTTP 200), credentials are valid
 	 * 4. If failed (401, 403, etc.), shows user-friendly error message
-	 * 
-	 * The authenticate property automatically adds the API key based on authMethod,
-	 * so we don't need to manually add it here.
 	 */
 	test: ICredentialTestRequest = {
 		request: {
-			// Base URL for Twelve Data API
 			baseURL: 'https://api.twelvedata.com',
-			// Test endpoint - /stocks is a simple endpoint that requires authentication
-			// but doesn't need any parameters, making it perfect for testing
 			url: '/stocks',
-			// The authenticate property above will automatically add:
-			// - Authorization header (if authMethod is 'header'), OR
-			// - apikey query parameter (if authMethod is 'queryString')
 		},
 	};
 }

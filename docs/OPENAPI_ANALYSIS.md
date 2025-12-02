@@ -173,6 +173,66 @@ Based on frequency analysis across endpoints:
     - **Description**: Country where instrument is traded
     - **Example**: `country=United States`
 
+### Parameter-to-Endpoint Category Mapping
+
+This matrix shows which parameters apply to different endpoint categories, helping n8n node authors know which parameters to expose for each node type.
+
+#### Endpoint Categories Defined:
+- **Time Series**: Historical data endpoints (`/time_series`, `/eod`, technical indicators)
+- **Single-Date**: Real-time/single point data (`/price`, `/quote`, `/exchange_rate`)
+- **Lookup/Search**: Discovery endpoints (`/symbol_search`, `/earliest_timestamp`)
+- **Reference**: Catalog endpoints (`/stocks`, `/forex_pairs`, `/cryptocurrencies`, `/exchanges`)
+- **Fundamentals**: Financial statements (`/income_statement`, `/balance_sheet`, `/earnings`)
+- **Analysis**: Forward-looking data (`/analyst_ratings`, `/earnings_estimate`)
+- **Bulk/Batch**: Multi-symbol operations (`/batch`, `/complex_data`)
+
+#### Parameter Applicability by Category:
+
+| Parameter | Time Series | Single-Date | Lookup/Search | Reference | Fundamentals | Analysis | Bulk/Batch |
+|-----------|------------|-------------|---------------|-----------|--------------|----------|------------|
+| **symbol** | Required | Required | Optional | Optional | Required | Required | Required |
+| **interval** | Required | N/A | N/A | N/A | N/A | N/A | Optional |
+| **outputsize** | Optional | N/A | N/A | Optional | Optional | N/A | N/A |
+| **exchange** | Optional | Optional | Optional | Optional | Optional | Optional | Optional |
+| **apikey** | Required | Required | Required | Required | Required | Required | Required |
+| **timezone** | Optional | Optional | N/A | N/A | N/A | N/A | Optional |
+| **start_date/end_date** | Optional | N/A | N/A | N/A | Optional | N/A | Optional |
+| **date** | N/A | Optional | N/A | N/A | Optional | Optional | N/A |
+| **order** | Optional | N/A | N/A | N/A | N/A | N/A | N/A |
+| **format** | Optional | Optional | N/A | Optional | Optional | Optional | Optional |
+| **type** | N/A | N/A | Optional | Optional | N/A | N/A | N/A |
+| **country** | N/A | N/A | Optional | Optional | N/A | N/A | N/A |
+
+#### Quick Reference Examples by Category:
+
+**Time Series endpoints** (`/time_series`, `/eod`, technical indicators):
+- Required: `symbol`, `interval`, `apikey`
+- Common optional: `outputsize`, `start_date`, `end_date`, `order`, `timezone`, `exchange`, `format`
+
+**Single-Date endpoints** (`/price`, `/quote`, `/exchange_rate`):
+- Required: `symbol`, `apikey`
+- Common optional: `exchange`, `timezone`, `date`, `format`
+
+**Lookup/Search endpoints** (`/symbol_search`, `/earliest_timestamp`):
+- Required: `apikey`
+- Common optional: `symbol`, `exchange`, `type`, `country`
+
+**Reference endpoints** (`/stocks`, `/forex_pairs`, `/cryptocurrencies`, `/exchanges`):
+- Required: `apikey`
+- Common optional: `symbol`, `exchange`, `type`, `country`, `outputsize`, `format`
+
+**Fundamentals endpoints** (`/income_statement`, `/balance_sheet`, `/earnings`):
+- Required: `symbol`, `apikey`
+- Common optional: `exchange`, `date`, `start_date`, `end_date`, `outputsize`, `format`
+
+**Analysis endpoints** (`/analyst_ratings`, `/earnings_estimate`):
+- Required: `symbol`, `apikey`
+- Common optional: `exchange`, `date`, `format`
+
+**Bulk/Batch endpoints** (`/batch`, `/complex_data`):
+- Required: `symbol` (comma-separated list), `apikey`
+- Common optional: `interval`, `start_date`, `end_date`, `timezone`, `exchange`, `format`
+
 ---
 
 ## 5. Rate Limiting Information

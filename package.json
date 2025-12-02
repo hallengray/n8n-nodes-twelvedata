@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"description": "n8n community node for Twelve Data API - Access financial market data for stocks, forex, crypto, ETFs, and more",
 	"license": "MIT",
-	"homepage": "https://github.com/yourusername/n8n-nodes-twelve-data",
+	"homepage": "https://github.com/hallengray/n8n-nodes-twelvedata",
 	"keywords": [
 		"n8n-community-node-package",
 		"n8n",
@@ -15,12 +15,12 @@
 		"market-data"
 	],
 	"author": {
-		"name": "Your Name",
-		"email": "your.email@example.com"
+		"name": "Femi",
+		"email": "hallengray@gmail.com"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/yourusername/n8n-nodes-twelve-data.git"
+		"url": "https://github.com/hallengray/n8n-nodes-twelvedata.git"
 	},
 	"scripts": {
 		"build": "n8n-node build",
@@ -53,7 +53,7 @@
 		"typescript": "5.9.3"
 	},
 	"peerDependencies": {
-		"n8n-workflow": "*"
+		"n8n-workflow": ">=1.120.0 <2.0.0"
 	},
 	"dependencies": {
 		"@devlikeapro/n8n-openapi-node": "^0.1.4",
