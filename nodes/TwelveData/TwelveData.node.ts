@@ -333,99 +333,99 @@ export class TwelveData implements INodeType {
 					},
 				},
 				
-				options: [
-					{
-						name: 'Get Quote',
-						value: 'getQuote',
-						
-						/**
-						 * action: Short description shown in node subtitle
-						 */
-						action: 'Get real-time quote for a symbol',
-						
-						/**
-						 * description: Longer help text
-						 */
-						description: 'Get real-time price quote including bid, ask, open, high, low, close, volume',
-						
-						/**
-						 * routing: How this operation maps to an API request
-						 * 
-						 * This is the DECLARATIVE MAGIC!
-						 * Instead of writing code to make API calls, we just describe:
-						 * - method: HTTP method (GET, POST, etc.)
-						 * - url: API endpoint path
-						 * 
-						 * n8n handles the rest automatically!
-						 */
-						routing: {
-							request: {
-								method: 'GET',
-								url: '/quote',
-							},
+			options: [
+				{
+					name: 'Convert Currency',
+					value: 'currencyConversion',
+					action: 'Convert currency amount',
+					description: 'Convert an amount from one currency to another',
+					routing: {
+						request: {
+							method: 'GET',
+							url: '/currency_conversion',
 						},
 					},
-					{
-						name: 'Get Price',
-						value: 'getPrice',
-						action: 'Get current price for a symbol',
-						description: 'Get just the current price (lighter than full quote)',
-						routing: {
-							request: {
-								method: 'GET',
-								url: '/price',
-							},
+				},
+				{
+					name: 'Get End of Day Price',
+					value: 'getEod',
+					action: 'Get end of day price',
+					description: 'Get the closing price for a specific date',
+					routing: {
+						request: {
+							method: 'GET',
+							url: '/eod',
 						},
 					},
-					{
-						name: 'Get Time Series',
-						value: 'getTimeSeries',
-						action: 'Get historical time series data',
-						description: 'Get historical OHLCV (Open, High, Low, Close, Volume) data',
-						routing: {
-							request: {
-								method: 'GET',
-								url: '/time_series',
-							},
+				},
+				{
+					name: 'Get Exchange Rate',
+					value: 'getExchangeRate',
+					action: 'Get currency exchange rate',
+					description: 'Get real-time exchange rate between two currencies',
+					routing: {
+						request: {
+							method: 'GET',
+							url: '/exchange_rate',
 						},
 					},
-					{
-						name: 'Get End of Day Price',
-						value: 'getEod',
-						action: 'Get end of day price',
-						description: 'Get the closing price for a specific date',
-						routing: {
-							request: {
-								method: 'GET',
-								url: '/eod',
-							},
+				},
+				{
+					name: 'Get Price',
+					value: 'getPrice',
+					action: 'Get current price for a symbol',
+					description: 'Get just the current price (lighter than full quote)',
+					routing: {
+						request: {
+							method: 'GET',
+							url: '/price',
 						},
 					},
-					{
-						name: 'Get Exchange Rate',
-						value: 'getExchangeRate',
-						action: 'Get currency exchange rate',
-						description: 'Get real-time exchange rate between two currencies',
-						routing: {
-							request: {
-								method: 'GET',
-								url: '/exchange_rate',
-							},
+				},
+				{
+					name: 'Get Quote',
+					value: 'getQuote',
+					
+					/**
+					 * action: Short description shown in node subtitle
+					 */
+					action: 'Get real time quote for a symbol',
+					
+					/**
+					 * description: Longer help text
+					 */
+					description: 'Get real-time price quote including bid, ask, open, high, low, close, volume',
+					
+					/**
+					 * routing: How this operation maps to an API request
+					 * 
+					 * This is the DECLARATIVE MAGIC!
+					 * Instead of writing code to make API calls, we just describe:
+					 * - method: HTTP method (GET, POST, etc.)
+					 * - url: API endpoint path
+					 * 
+					 * n8n handles the rest automatically!
+					 */
+					routing: {
+						request: {
+							method: 'GET',
+							url: '/quote',
 						},
 					},
-					{
-						name: 'Convert Currency',
-						value: 'currencyConversion',
-						action: 'Convert currency amount',
-						description: 'Convert an amount from one currency to another',
-						routing: {
-							request: {
-								method: 'GET',
-								url: '/currency_conversion',
-							},
+				},
+				{
+					name: 'Get Time Series',
+					value: 'getTimeSeries',
+					action: 'Get historical time series data',
+					description: 'Get historical OHLCV (Open, High, Low, Close, Volume) data',
+					routing: {
+						request: {
+							method: 'GET',
+							url: '/time_series',
 						},
 					},
-				],
+				},
+			],
 				default: 'getQuote',
 			},
 			
@@ -508,104 +508,104 @@ export class TwelveData implements INodeType {
 						resource: ['referenceData'],
 					},
 				},
-				options: [
-					{
-						name: 'List Stocks',
-						value: 'listStocks',
-						action: 'List available stocks',
-						description: 'Get a list of available stock symbols',
-						routing: {
-							request: {
-								method: 'GET',
-								url: '/stocks',
-							},
+			options: [
+				{
+					name: 'Get Market State',
+					value: 'getMarketState',
+					action: 'Get market state',
+					description: 'Check if markets are open or closed',
+					routing: {
+						request: {
+							method: 'GET',
+							url: '/market_state',
 						},
 					},
-					{
-						name: 'List Forex Pairs',
-						value: 'listForexPairs',
-						action: 'List forex currency pairs',
-						description: 'Get a list of available forex currency pairs',
-						routing: {
-							request: {
-								method: 'GET',
-								url: '/forex_pairs',
-							},
+				},
+				{
+					name: 'List Cryptocurrencies',
+					value: 'listCryptocurrencies',
+					action: 'List cryptocurrencies',
+					description: 'Get a list of available cryptocurrency pairs',
+					routing: {
+						request: {
+							method: 'GET',
+							url: '/cryptocurrencies',
 						},
 					},
-					{
-						name: 'List Cryptocurrencies',
-						value: 'listCryptocurrencies',
-						action: 'List cryptocurrencies',
-						description: 'Get a list of available cryptocurrency pairs',
-						routing: {
-							request: {
-								method: 'GET',
-								url: '/cryptocurrencies',
-							},
+				},
+				{
+					name: 'List ETFs',
+					value: 'listEtfs',
+					action: 'List et fs',
+					description: 'Get a list of available ETF symbols',
+					routing: {
+						request: {
+							method: 'GET',
+							url: '/etf',
 						},
 					},
-					{
-						name: 'List ETFs',
-						value: 'listEtfs',
-						action: 'List ETFs',
-						description: 'Get a list of available ETF symbols',
-						routing: {
-							request: {
-								method: 'GET',
-								url: '/etf',
-							},
+				},
+				{
+					name: 'List Exchanges',
+					value: 'listExchanges',
+					action: 'List exchanges',
+					description: 'Get a list of available stock exchanges',
+					routing: {
+						request: {
+							method: 'GET',
+							url: '/exchanges',
 						},
 					},
-					{
-						name: 'List Indices',
-						value: 'listIndices',
-						action: 'List market indices',
-						description: 'Get a list of available market indices',
-						routing: {
-							request: {
-								method: 'GET',
-								url: '/indices',
-							},
+				},
+				{
+					name: 'List Forex Pairs',
+					value: 'listForexPairs',
+					action: 'List forex currency pairs',
+					description: 'Get a list of available forex currency pairs',
+					routing: {
+						request: {
+							method: 'GET',
+							url: '/forex_pairs',
 						},
 					},
-					{
-						name: 'List Exchanges',
-						value: 'listExchanges',
-						action: 'List exchanges',
-						description: 'Get a list of available stock exchanges',
-						routing: {
-							request: {
-								method: 'GET',
-								url: '/exchanges',
-							},
+				},
+				{
+					name: 'List Indices',
+					value: 'listIndices',
+					action: 'List market indices',
+					description: 'Get a list of available market indices',
+					routing: {
+						request: {
+							method: 'GET',
+							url: '/indices',
 						},
 					},
-					{
-						name: 'Search Symbol',
-						value: 'symbolSearch',
-						action: 'Search for symbols',
-						description: 'Search for symbols by name or ticker',
-						routing: {
-							request: {
-								method: 'GET',
-								url: '/symbol_search',
-							},
+				},
+				{
+					name: 'List Stocks',
+					value: 'listStocks',
+					action: 'List available stocks',
+					description: 'Get a list of available stock symbols',
+					routing: {
+						request: {
+							method: 'GET',
+							url: '/stocks',
 						},
 					},
-					{
-						name: 'Get Market State',
-						value: 'getMarketState',
-						action: 'Get market state',
-						description: 'Check if markets are open or closed',
-						routing: {
-							request: {
-								method: 'GET',
-								url: '/market_state',
-							},
+				},
+				{
+					name: 'Search Symbol',
+					value: 'symbolSearch',
+					action: 'Search for symbols',
+					description: 'Search for symbols by name or ticker',
+					routing: {
+						request: {
+							method: 'GET',
+							url: '/symbol_search',
 						},
 					},
-				],
+				},
+			],
 				default: 'listStocks',
 			},
 			
@@ -627,7 +627,7 @@ export class TwelveData implements INodeType {
 						name: 'Get Technical Indicator',
 						value: 'getTechnicalIndicator',
 						action: 'Calculate technical indicator',
-						description: 'Calculate technical indicators like SMA, EMA, RSI, MACD, etc.',
+						description: 'Calculate technical indicators like SMA, EMA, RSI, MACD, etc',
 						routing: {
 							request: {
 								method: 'GET',
@@ -818,19 +818,19 @@ export class TwelveData implements INodeType {
 						operation: ['getTimeSeries', 'getTechnicalIndicator'],
 					},
 				},
-				options: [
-					{ name: '1 Minute', value: '1min' },
-					{ name: '5 Minutes', value: '5min' },
-					{ name: '15 Minutes', value: '15min' },
-					{ name: '30 Minutes', value: '30min' },
-					{ name: '45 Minutes', value: '45min' },
-					{ name: '1 Hour', value: '1h' },
-					{ name: '2 Hours', value: '2h' },
-					{ name: '4 Hours', value: '4h' },
-					{ name: '1 Day', value: '1day' },
-					{ name: '1 Week', value: '1week' },
-					{ name: '1 Month', value: '1month' },
-				],
+			options: [
+				{ name: '1 Day', value: '1day' },
+				{ name: '1 Hour', value: '1h' },
+				{ name: '1 Minute', value: '1min' },
+				{ name: '1 Month', value: '1month' },
+				{ name: '1 Week', value: '1week' },
+				{ name: '15 Minutes', value: '15min' },
+				{ name: '2 Hours', value: '2h' },
+				{ name: '30 Minutes', value: '30min' },
+				{ name: '4 Hours', value: '4h' },
+				{ name: '45 Minutes', value: '45min' },
+				{ name: '5 Minutes', value: '5min' },
+			],
 				routing: {
 					send: {
 						type: 'query',
@@ -865,121 +865,121 @@ export class TwelveData implements INodeType {
 					},
 				},
 				
-				/**
-				 * options: The optional fields users can add
-				 */
-				options: [
-					{
-						displayName: 'Output Size',
-						name: 'outputsize',
-						type: 'number',
-						default: 30,
-						description: 'Number of data points to return (max 5000)',
-						routing: {
-							send: {
-								type: 'query',
-								property: 'outputsize',
-							},
+			/**
+			 * options: The optional fields users can add
+			 */
+			options: [
+				{
+					displayName: 'Country',
+					name: 'country',
+					type: 'string',
+					default: '',
+					placeholder: 'e.g., United States, Germany',
+					description: 'Filter by country',
+					routing: {
+						send: {
+							type: 'query',
+							property: 'country',
 						},
 					},
-					{
-						displayName: 'Date',
-						name: 'date',
-						type: 'string',
-						default: '',
-						placeholder: 'e.g., 2024-01-15',
-						description: 'Specific date for EOD price (format: YYYY-MM-DD)',
-						routing: {
-							send: {
-								type: 'query',
-								property: 'date',
-							},
+				},
+				{
+					displayName: 'Date',
+					name: 'date',
+					type: 'string',
+					default: '',
+					placeholder: 'e.g., 2024-01-15',
+					description: 'Specific date for EOD price (format: YYYY-MM-DD)',
+					routing: {
+						send: {
+							type: 'query',
+							property: 'date',
 						},
 					},
-					{
-						displayName: 'Start Date',
-						name: 'start_date',
-						type: 'string',
-						default: '',
-						placeholder: 'e.g., 2024-01-01',
-						description: 'Start date for time series (format: YYYY-MM-DD)',
-						routing: {
-							send: {
-								type: 'query',
-								property: 'start_date',
-							},
+				},
+				{
+					displayName: 'Decimal Places',
+					name: 'dp',
+					type: 'number',
+					default: 5,
+					description: 'Number of decimal places for prices',
+					routing: {
+						send: {
+							type: 'query',
+							property: 'dp',
 						},
 					},
-					{
-						displayName: 'End Date',
-						name: 'end_date',
-						type: 'string',
-						default: '',
-						placeholder: 'e.g., 2024-12-31',
-						description: 'End date for time series (format: YYYY-MM-DD)',
-						routing: {
-							send: {
-								type: 'query',
-								property: 'end_date',
-							},
+				},
+				{
+					displayName: 'End Date',
+					name: 'end_date',
+					type: 'string',
+					default: '',
+					placeholder: 'e.g., 2024-12-31',
+					description: 'End date for time series (format: YYYY-MM-DD)',
+					routing: {
+						send: {
+							type: 'query',
+							property: 'end_date',
 						},
 					},
-					{
-						displayName: 'Exchange',
-						name: 'exchange',
-						type: 'string',
-						default: '',
-						placeholder: 'e.g., NYSE, NASDAQ',
-						description: 'Filter by specific exchange',
-						routing: {
-							send: {
-								type: 'query',
-								property: 'exchange',
-							},
+				},
+				{
+					displayName: 'Exchange',
+					name: 'exchange',
+					type: 'string',
+					default: '',
+					placeholder: 'e.g., NYSE, NASDAQ',
+					description: 'Filter by specific exchange',
+					routing: {
+						send: {
+							type: 'query',
+							property: 'exchange',
 						},
 					},
-					{
-						displayName: 'Country',
-						name: 'country',
-						type: 'string',
-						default: '',
-						placeholder: 'e.g., United States, Germany',
-						description: 'Filter by country',
-						routing: {
-							send: {
-								type: 'query',
-								property: 'country',
-							},
+				},
+				{
+					displayName: 'Output Size',
+					name: 'outputsize',
+					type: 'number',
+					default: 30,
+					description: 'Number of data points to return (max 5000)',
+					routing: {
+						send: {
+							type: 'query',
+							property: 'outputsize',
 						},
 					},
-					{
-						displayName: 'Timezone',
-						name: 'timezone',
-						type: 'string',
-						default: '',
-						placeholder: 'e.g., America/New_York, UTC',
-						description: 'Timezone for the returned data',
-						routing: {
-							send: {
-								type: 'query',
-								property: 'timezone',
-							},
+				},
+				{
+					displayName: 'Start Date',
+					name: 'start_date',
+					type: 'string',
+					default: '',
+					placeholder: 'e.g., 2024-01-01',
+					description: 'Start date for time series (format: YYYY-MM-DD)',
+					routing: {
+						send: {
+							type: 'query',
+							property: 'start_date',
 						},
 					},
-					{
-						displayName: 'Decimal Places',
-						name: 'dp',
-						type: 'number',
-						default: 5,
-						description: 'Number of decimal places for prices',
-						routing: {
-							send: {
-								type: 'query',
-								property: 'dp',
-							},
+				},
+				{
+					displayName: 'Timezone',
+					name: 'timezone',
+					type: 'string',
+					default: '',
+					placeholder: 'e.g., America/New_York, UTC',
+					description: 'Timezone for the returned data',
+					routing: {
+						send: {
+							type: 'query',
+							property: 'timezone',
 						},
 					},
-				],
+				},
+			],
 			},
 			
 			// -----------------------------------------------------------------
