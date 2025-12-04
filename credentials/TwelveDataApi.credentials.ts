@@ -24,7 +24,7 @@ export class TwelveDataApi implements ICredentialType {
 			},
 			default: '',
 			required: true,
-			description: 'Your Twelve Data API key. Get it from <a href="https://twelvedata.com/account/api-keys" target="_blank">your dashboard</a>.',
+			description: 'Your Twelve Data API key. Get it from <a href="https://twelvedata.com/account/api-keys" target="_blank">your dashboard</a>. <strong>Security:</strong> Never share this key or commit it to version control. Rotate regularly for best security.',
 		},
 		{
 			displayName: 'Authentication Method',

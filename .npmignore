@@ -1,0 +1,86 @@
+# Source files (only dist/ goes to npm)
+src/
+nodes/
+credentials/
+*.ts
+!*.d.ts
+tsconfig.json
+
+# Development & testing
+tests/
+coverage/
+.nyc_output/
+*.test.js
+test-data/
+docs/TESTING_LOG.md
+docs/INTEGRATION_TESTING_CHECKLIST.md
+docs/STEP_BY_STEP_TESTING.md
+
+# Documentation (keep README, exclude internal docs)
+docs/OPENAPI_ANALYSIS.md
+docs/CREDENTIALS_SETUP.md
+INVESTIGATION-COMPLETE.md
+TROUBLESHOOTING_401.md
+FIX_CREDENTIAL_STEPS.md
+ISSUE-LEGACY-PEER-DEPS.md
+DOCUMENTATION_REVIEW_SUMMARY.md
+CLIENT_HANDOVER.md
+docs/ADR-001-LEGACY-PEER-DEPS.md
+docs/DEPENDENCY-REMOVAL-PLAN.md
+docs/INTEGRATION_TESTING.md
+docs/LEGACY-PEER-DEPS-SUMMARY.md
+docs/N8N_VERIFICATION_COMPLIANCE.md
+docs/QUICK-REFERENCE-PEER-DEPS.md
+
+# Git
+.git/
+.gitignore
+.github/
+
+# Environment & secrets
+.env*
+*.key
+*.pem
+credentials.json
+secrets/
+
+# Build artifacts
+node_modules/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+pnpm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# Package test files
+*.tgz
+package-lock.json.backup
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+.temp/
+
