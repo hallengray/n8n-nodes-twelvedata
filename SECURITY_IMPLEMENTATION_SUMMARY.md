@@ -58,14 +58,17 @@
 
 ### ✅ Priority 3: NICE TO HAVE (Completed)
 
-#### 6. Added Error Sanitization Function
-- **Location:** `nodes/TwelveData/TwelveData.node.ts` (lines 24-47)
-- **Function:** `sanitizeError(error: any): string`
+#### 6. Added Error Sanitization Utility Module
+- **Location:** `nodes/TwelveData/utils/errorSanitizer.ts`
+- **Functions:** 
+  - `sanitizeError(error: unknown): string` - Sanitizes error messages
+  - `sanitizeErrorObject(error: unknown): Record<string, unknown>` - Sanitizes entire error objects
 - **Features:**
   - Removes API keys from error messages
   - Removes Authorization headers from error strings
   - Prevents accidental credential leakage in logs
-  - Ready to use when error handling is needed
+  - Proper TypeScript types (no `any`)
+  - Ready to import and use when implementing custom error handling
 
 #### 7. Enhanced Credential Description
 - **Location:** `credentials/TwelveDataApi.credentials.ts` (line 27)
