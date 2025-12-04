@@ -536,7 +536,7 @@ export class TwelveData implements INodeType {
 				{
 					name: 'List ETFs',
 					value: 'listEtfs',
-					action: 'List et fs',
+					action: 'List ETFs',
 					description: 'Get a list of available ETF symbols',
 					routing: {
 						request: {

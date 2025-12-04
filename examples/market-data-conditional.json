@@ -1,0 +1,187 @@
+{
+  "name": "Market Data with Conditional Logic",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "manual-trigger",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "resource": "coreData",
+        "operation": "getQuote",
+        "symbol": "AAPL"
+      },
+      "id": "twelve-data-quote",
+      "name": "Get Stock Quote",
+      "type": "n8n-nodes-twelve-data.twelveData",
+      "typeVersion": 1,
+      "position": [450, 300],
+      "credentials": {
+        "twelveDataApi": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "Twelve Data Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "condition-1",
+              "leftValue": "={{ parseFloat($json.percent_change) }}",
+              "rightValue": "0",
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "if-price-up",
+      "name": "Price Up or Down?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"symbol\": \"{{ $json.symbol }}\",\n  \"name\": \"{{ $json.name }}\",\n  \"price\": {{ $json.close }},\n  \"change\": {{ $json.change }},\n  \"percent_change\": {{ $json.percent_change }},\n  \"status\": \"UP\",\n  \"emoji\": \"📈\",\n  \"message\": \"{{ $json.symbol }} is UP {{ $json.percent_change }}% today!\",\n  \"52_week_high\": {{ $json.fifty_two_week.high }},\n  \"52_week_low\": {{ $json.fifty_two_week.low }}\n}",
+        "options": {}
+      },
+      "id": "set-up",
+      "name": "Format UP Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [850, 200]
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"symbol\": \"{{ $json.symbol }}\",\n  \"name\": \"{{ $json.name }}\",\n  \"price\": {{ $json.close }},\n  \"change\": {{ $json.change }},\n  \"percent_change\": {{ $json.percent_change }},\n  \"status\": \"DOWN\",\n  \"emoji\": \"📉\",\n  \"message\": \"{{ $json.symbol }} is DOWN {{ $json.percent_change }}% today.\",\n  \"52_week_high\": {{ $json.fifty_two_week.high }},\n  \"52_week_low\": {{ $json.fifty_two_week.low }}\n}",
+        "options": {}
+      },
+      "id": "set-down",
+      "name": "Format DOWN Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [850, 400]
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "mergeByFields": {
+          "values": []
+        },
+        "options": {}
+      },
+      "id": "merge",
+      "name": "Merge Results",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [1050, 300]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get Stock Quote",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Stock Quote": {
+      "main": [
+        [
+          {
+            "node": "Price Up or Down?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Price Up or Down?": {
+      "main": [
+        [
+          {
+            "node": "Format UP Data",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Format DOWN Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format UP Data": {
+      "main": [
+        [
+          {
+            "node": "Merge Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format DOWN Data": {
+      "main": [
+        [
+          {
+            "node": "Merge Results",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1",
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "instanceId": "example"
+  },
+  "id": "market-data-conditional",
+  "tags": [
+    {
+      "name": "Twelve Data",
+      "id": "twelve-data"
+    },
+    {
+      "name": "Conditional Logic",
+      "id": "conditional"
+    },
+    {
+      "name": "Example",
+      "id": "example"
+    }
+  ]
+}
+

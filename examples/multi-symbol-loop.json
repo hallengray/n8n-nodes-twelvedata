@@ -1,0 +1,192 @@
+{
+  "name": "Multi-Symbol Loop Processing",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "manual-trigger",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "=[\n  { \"symbol\": \"AAPL\", \"name\": \"Apple\" },\n  { \"symbol\": \"MSFT\", \"name\": \"Microsoft\" },\n  { \"symbol\": \"GOOGL\", \"name\": \"Google\" },\n  { \"symbol\": \"TSLA\", \"name\": \"Tesla\" },\n  { \"symbol\": \"AMZN\", \"name\": \"Amazon\" }\n]",
+        "options": {}
+      },
+      "id": "set-symbols",
+      "name": "Define Symbol List",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "split-items",
+      "name": "Split Into Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "resource": "coreData",
+        "operation": "getQuote",
+        "symbol": "={{ $json.symbol }}"
+      },
+      "id": "twelve-data-quote",
+      "name": "Get Quote for Symbol",
+      "type": "n8n-nodes-twelve-data.twelveData",
+      "typeVersion": 1,
+      "position": [850, 300],
+      "credentials": {
+        "twelveDataApi": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "Twelve Data Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 0.5,
+        "unit": "seconds"
+      },
+      "id": "wait",
+      "name": "Rate Limit Delay",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [1050, 300]
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "id": "aggregate",
+      "name": "Aggregate Results",
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [1250, 300]
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"portfolio_summary\": {\n    \"total_symbols\": {{ $json.data.length }},\n    \"symbols\": {{ JSON.stringify($json.data.map(item => item.symbol)) }},\n    \"timestamp\": \"{{ new Date().toISOString() }}\"\n  },\n  \"quotes\": {{ JSON.stringify($json.data) }}\n}",
+        "options": {}
+      },
+      "id": "format-output",
+      "name": "Format Portfolio Summary",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [1450, 300]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Define Symbol List",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Define Symbol List": {
+      "main": [
+        [
+          {
+            "node": "Split Into Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Into Items": {
+      "main": [
+        [
+          {
+            "node": "Get Quote for Symbol",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Quote for Symbol": {
+      "main": [
+        [
+          {
+            "node": "Rate Limit Delay",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Rate Limit Delay": {
+      "main": [
+        [
+          {
+            "node": "Split Into Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Into Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Aggregate Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate Results": {
+      "main": [
+        [
+          {
+            "node": "Format Portfolio Summary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1",
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "instanceId": "example"
+  },
+  "id": "multi-symbol-loop",
+  "tags": [
+    {
+      "name": "Twelve Data",
+      "id": "twelve-data"
+    },
+    {
+      "name": "Loop",
+      "id": "loop"
+    },
+    {
+      "name": "Example",
+      "id": "example"
+    }
+  ]
+}
+

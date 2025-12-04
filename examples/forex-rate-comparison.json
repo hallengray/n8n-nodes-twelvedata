@@ -1,0 +1,195 @@
+{
+  "name": "Forex Rate Comparison",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "manual-trigger",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "resource": "coreData",
+        "operation": "getQuote",
+        "symbol": "EUR/USD"
+      },
+      "id": "twelve-data-eurusd",
+      "name": "Get EUR/USD Rate",
+      "type": "n8n-nodes-twelve-data.twelveData",
+      "typeVersion": 1,
+      "position": [450, 200],
+      "credentials": {
+        "twelveDataApi": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "Twelve Data Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "coreData",
+        "operation": "getQuote",
+        "symbol": "GBP/USD"
+      },
+      "id": "twelve-data-gbpusd",
+      "name": "Get GBP/USD Rate",
+      "type": "n8n-nodes-twelve-data.twelveData",
+      "typeVersion": 1,
+      "position": [450, 400],
+      "credentials": {
+        "twelveDataApi": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "Twelve Data Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"pair\": \"EUR/USD\",\n  \"rate\": {{ $json.close }},\n  \"change\": {{ $json.change }},\n  \"percent_change\": {{ $json.percent_change }},\n  \"high\": {{ $json.high }},\n  \"low\": {{ $json.low }}\n}",
+        "options": {}
+      },
+      "id": "format-eurusd",
+      "name": "Format EUR/USD",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [650, 200]
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"pair\": \"GBP/USD\",\n  \"rate\": {{ $json.close }},\n  \"change\": {{ $json.change }},\n  \"percent_change\": {{ $json.percent_change }},\n  \"high\": {{ $json.high }},\n  \"low\": {{ $json.low }}\n}",
+        "options": {}
+      },
+      "id": "format-gbpusd",
+      "name": "Format GBP/USD",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [650, 400]
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineAll",
+        "options": {}
+      },
+      "id": "merge-rates",
+      "name": "Merge Forex Rates",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [850, 300]
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"forex_comparison\": {\n    \"timestamp\": \"{{ new Date().toISOString() }}\",\n    \"pairs\": [\n      {\n        \"pair\": \"EUR/USD\",\n        \"rate\": {{ $('Format EUR/USD').item.json.rate }},\n        \"change\": {{ $('Format EUR/USD').item.json.change }},\n        \"percent_change\": {{ $('Format EUR/USD').item.json.percent_change }}\n      },\n      {\n        \"pair\": \"GBP/USD\",\n        \"rate\": {{ $('Format GBP/USD').item.json.rate }},\n        \"change\": {{ $('Format GBP/USD').item.json.change }},\n        \"percent_change\": {{ $('Format GBP/USD').item.json.percent_change }}\n      }\n    ],\n    \"analysis\": {\n      \"eur_usd_stronger\": {{ $('Format EUR/USD').item.json.percent_change > $('Format GBP/USD').item.json.percent_change }},\n      \"best_performer\": \"{{ $('Format EUR/USD').item.json.percent_change > $('Format GBP/USD').item.json.percent_change ? 'EUR/USD' : 'GBP/USD' }}\"\n    }\n  }\n}",
+        "options": {}
+      },
+      "id": "create-comparison",
+      "name": "Create Comparison Report",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [1050, 300]
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get EUR/USD Rate",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get GBP/USD Rate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get EUR/USD Rate": {
+      "main": [
+        [
+          {
+            "node": "Format EUR/USD",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get GBP/USD Rate": {
+      "main": [
+        [
+          {
+            "node": "Format GBP/USD",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format EUR/USD": {
+      "main": [
+        [
+          {
+            "node": "Merge Forex Rates",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format GBP/USD": {
+      "main": [
+        [
+          {
+            "node": "Merge Forex Rates",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge Forex Rates": {
+      "main": [
+        [
+          {
+            "node": "Create Comparison Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1",
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "instanceId": "example"
+  },
+  "id": "forex-rate-comparison",
+  "tags": [
+    {
+      "name": "Twelve Data",
+      "id": "twelve-data"
+    },
+    {
+      "name": "Forex",
+      "id": "forex"
+    },
+    {
+      "name": "Example",
+      "id": "example"
+    }
+  ]
+}
+

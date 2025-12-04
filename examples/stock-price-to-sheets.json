@@ -1,0 +1,118 @@
+{
+  "name": "Stock Price to Google Sheets",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "manual-trigger",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "resource": "coreData",
+        "operation": "getQuote",
+        "symbol": "AAPL"
+      },
+      "id": "twelve-data-quote",
+      "name": "Get Stock Quote",
+      "type": "n8n-nodes-twelve-data.twelveData",
+      "typeVersion": 1,
+      "position": [450, 300],
+      "credentials": {
+        "twelveDataApi": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "Twelve Data Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_SPREADSHEET_ID",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Sheet1",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Symbol": "={{ $json.symbol }}",
+            "Name": "={{ $json.name }}",
+            "Price": "={{ $json.close }}",
+            "Change": "={{ $json.change }}",
+            "Percent Change": "={{ $json.percent_change }}",
+            "Volume": "={{ $json.volume }}",
+            "Timestamp": "={{ $json.datetime }}"
+          }
+        }
+      },
+      "id": "google-sheets",
+      "name": "Append to Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [650, 300],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_GOOGLE_CREDENTIAL_ID",
+          "name": "Google Sheets Account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get Stock Quote",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Stock Quote": {
+      "main": [
+        [
+          {
+            "node": "Append to Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1",
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "instanceId": "example"
+  },
+  "id": "stock-price-to-sheets",
+  "tags": [
+    {
+      "name": "Twelve Data",
+      "id": "twelve-data"
+    },
+    {
+      "name": "Google Sheets",
+      "id": "google-sheets"
+    },
+    {
+      "name": "Example",
+      "id": "example"
+    }
+  ]
+}
+
