@@ -18,33 +18,11 @@
  * - Operation: An action on that resource (Get Quote, Get Time Series, etc.)
  * - Properties: Form fields users fill out (symbol, interval, etc.)
  * - Routing: How user input maps to API endpoints
- */
-
-/**
- * Sanitizes error messages to prevent accidental credential leakage
- * Removes API keys and Authorization headers from error strings
  * 
- * @param error - The error object or message to sanitize
- * @returns Sanitized error message with credentials redacted
+ * SECURITY NOTE:
+ * Error sanitization function is available in utils/errorSanitizer.ts
+ * for future use when implementing custom error handling.
  */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
-function sanitizeError(error: any): string {
-	const errorMessage = error.message || String(error);
-	
-	// Remove API keys if accidentally included
-	const sanitized = errorMessage.replace(
-		/apikey[=:]?\s*[a-zA-Z0-9_-]+/gi,
-		'apikey=[REDACTED]'
-	);
-	
-	// Remove Authorization headers
-	const cleanError = sanitized.replace(
-		/Authorization[=:]?\s*[a-zA-Z0-9_-]+/gi,
-		'Authorization: [REDACTED]'
-	);
-	
-	return cleanError;
-}
 
 import {
 	// NodeConnectionTypes defines input/output connection types
