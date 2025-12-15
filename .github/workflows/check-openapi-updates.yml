@@ -128,7 +128,7 @@ jobs:
       
       - name: Analyze changes
         id: analyze
-        if: steps.compare.outputs.changes_detected == 'true'
+        if: steps.compare.outputs.changes_detected == 'true' || github.event.inputs.force_issue == 'true'
         run: |
           echo "Analyzing changes..."
           

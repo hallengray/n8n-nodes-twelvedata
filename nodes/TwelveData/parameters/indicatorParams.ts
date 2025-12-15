@@ -19,7 +19,7 @@ export const allIndicatorOperations = [
 	// Moving Averages
 	'sma', 'ema', 'wma', 'dema', 'tema', 'trima', 'kama', 'mama', 't3',
 	// Momentum Indicators
-	'rsi', 'macd', 'stoch', 'stochrsi', 'adx', 'cci', 'mfi', 'roc', 'willr', 'uo', 'mom',
+	'rsi', 'macd', 'stoch', 'stochrsi', 'adx', 'cci', 'mfi', 'roc', 'willr', 'mom',
 	'ppo', 'apo', 'cmo', 'dx', 'trix', 'ultosc',
 	// Volatility Indicators
 	'bbands', 'atr', 'natr', 'trange', 'supertrend',
@@ -369,7 +369,7 @@ export const uoTimePeriod1Parameter: INodeProperties = {
 	displayOptions: {
 		show: {
 			resource: ['technicalIndicators'],
-			operation: ['uo', 'ultosc'],
+			operation: ['ultosc'],
 		},
 	},
 	routing: {
@@ -389,7 +389,7 @@ export const uoTimePeriod2Parameter: INodeProperties = {
 	displayOptions: {
 		show: {
 			resource: ['technicalIndicators'],
-			operation: ['uo', 'ultosc'],
+			operation: ['ultosc'],
 		},
 	},
 	routing: {
@@ -409,7 +409,7 @@ export const uoTimePeriod3Parameter: INodeProperties = {
 	displayOptions: {
 		show: {
 			resource: ['technicalIndicators'],
-			operation: ['uo', 'ultosc'],
+			operation: ['ultosc'],
 		},
 	},
 	routing: {
