@@ -1,0 +1,353 @@
+# =============================================================================
+# check-openapi-updates.yml - Automated OpenAPI Monitoring
+# =============================================================================
+#
+# PURPOSE:
+#   Automatically monitors the Twelve Data OpenAPI specification for changes
+#   and creates GitHub issues when updates are detected.
+#
+# SCHEDULE:
+#   - Runs every Monday at 9 AM UTC
+#   - Can be triggered manually via workflow_dispatch
+#
+# BEHAVIOR:
+#   1. Downloads the latest OpenAPI spec from Twelve Data
+#   2. Compares with the version in the repository
+#   3. If changes detected:
+#      - Runs change detection analysis
+#      - Creates a GitHub issue with summary
+#      - Labels the issue appropriately
+#      - Attaches the change report
+#
+# =============================================================================
+
+name: Check OpenAPI Updates
+
+on:
+  # Run weekly on Monday at 9 AM UTC
+  schedule:
+    - cron: '0 9 * * 1'
+  
+  # Allow manual trigger
+  workflow_dispatch:
+    inputs:
+      force_issue:
+        description: 'Create issue even if no changes detected (for testing)'
+        required: false
+        default: 'false'
+        type: boolean
+
+# Permissions needed to create issues
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check-openapi:
+    name: Check for OpenAPI Changes
+    runs-on: ubuntu-latest
+    
+    steps:
+      # =======================================================================
+      # SETUP
+      # =======================================================================
+      
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      
+      - name: Install jq for JSON processing
+        run: sudo apt-get install -y jq
+      
+      # =======================================================================
+      # DOWNLOAD AND COMPARE
+      # =======================================================================
+      
+      - name: Download latest OpenAPI spec
+        id: download
+        run: |
+          echo "Downloading OpenAPI spec from Twelve Data..."
+          
+          # Download the spec
+          curl -sSL --fail --connect-timeout 30 --max-time 120 \
+            -o openapi-latest.json \
+            "https://api.twelvedata.com/doc/swagger/openapi.json"
+          
+          # Validate JSON
+          if ! jq empty openapi-latest.json 2>/dev/null; then
+            echo "::error::Downloaded file is not valid JSON"
+            exit 1
+          fi
+          
+          echo "Download successful"
+          
+          # Get some basic stats
+          ENDPOINT_COUNT=$(jq '.paths | keys | length' openapi-latest.json)
+          VERSION=$(jq -r '.info.version // "unknown"' openapi-latest.json)
+          
+          echo "endpoint_count=$ENDPOINT_COUNT" >> $GITHUB_OUTPUT
+          echo "spec_version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Spec version: $VERSION, Endpoints: $ENDPOINT_COUNT"
+      
+      - name: Compare specifications
+        id: compare
+        run: |
+          echo "Comparing specifications..."
+          
+          # Check if current spec exists
+          if [ ! -f "openapi-spec.json" ]; then
+            echo "No current spec found - treating as new"
+            echo "changes_detected=true" >> $GITHUB_OUTPUT
+            echo "is_new_spec=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          # Calculate hashes
+          CURRENT_HASH=$(sha256sum openapi-spec.json | cut -d' ' -f1)
+          NEW_HASH=$(sha256sum openapi-latest.json | cut -d' ' -f1)
+          
+          echo "Current spec hash: $CURRENT_HASH"
+          echo "New spec hash: $NEW_HASH"
+          
+          if [ "$CURRENT_HASH" = "$NEW_HASH" ]; then
+            echo "No changes detected"
+            echo "changes_detected=false" >> $GITHUB_OUTPUT
+          else
+            echo "Changes detected!"
+            echo "changes_detected=true" >> $GITHUB_OUTPUT
+            echo "is_new_spec=false" >> $GITHUB_OUTPUT
+          fi
+      
+      # =======================================================================
+      # ANALYZE CHANGES
+      # =======================================================================
+      
+      - name: Analyze changes
+        id: analyze
+        if: steps.compare.outputs.changes_detected == 'true'
+        run: |
+          echo "Analyzing changes..."
+          
+          # Run change detection script if it exists
+          if [ -f "scripts/detect-changes.js" ]; then
+            if [ -f "openapi-spec.json" ]; then
+              node scripts/detect-changes.js openapi-spec.json openapi-latest.json \
+                --format json --output change-report.json
+              
+              # Extract summary for issue
+              NEW_ENDPOINTS=$(jq '.summary.newEndpoints // 0' change-report.json)
+              REMOVED_ENDPOINTS=$(jq '.summary.removedEndpoints // 0' change-report.json)
+              MODIFIED_ENDPOINTS=$(jq '.summary.modifiedEndpoints // 0' change-report.json)
+              BREAKING_CHANGES=$(jq '.summary.breakingChanges // 0' change-report.json)
+              
+              echo "new_endpoints=$NEW_ENDPOINTS" >> $GITHUB_OUTPUT
+              echo "removed_endpoints=$REMOVED_ENDPOINTS" >> $GITHUB_OUTPUT
+              echo "modified_endpoints=$MODIFIED_ENDPOINTS" >> $GITHUB_OUTPUT
+              echo "breaking_changes=$BREAKING_CHANGES" >> $GITHUB_OUTPUT
+              
+              # Generate markdown report
+              node scripts/detect-changes.js openapi-spec.json openapi-latest.json \
+                --format markdown --output change-report.md
+              
+              echo "Change analysis complete"
+            else
+              echo "No previous spec to compare"
+              echo "new_endpoints=${{ steps.download.outputs.endpoint_count }}" >> $GITHUB_OUTPUT
+              echo "removed_endpoints=0" >> $GITHUB_OUTPUT
+              echo "modified_endpoints=0" >> $GITHUB_OUTPUT
+              echo "breaking_changes=0" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "Change detection script not found, using basic comparison"
+            
+            # Basic comparison using jq
+            if [ -f "openapi-spec.json" ]; then
+              OLD_COUNT=$(jq '.paths | keys | length' openapi-spec.json)
+              NEW_COUNT=$(jq '.paths | keys | length' openapi-latest.json)
+              DIFF=$((NEW_COUNT - OLD_COUNT))
+              
+              if [ $DIFF -gt 0 ]; then
+                echo "new_endpoints=$DIFF" >> $GITHUB_OUTPUT
+              else
+                echo "new_endpoints=0" >> $GITHUB_OUTPUT
+              fi
+              
+              if [ $DIFF -lt 0 ]; then
+                echo "removed_endpoints=${DIFF#-}" >> $GITHUB_OUTPUT
+              else
+                echo "removed_endpoints=0" >> $GITHUB_OUTPUT
+              fi
+              
+              echo "modified_endpoints=unknown" >> $GITHUB_OUTPUT
+              echo "breaking_changes=unknown" >> $GITHUB_OUTPUT
+            fi
+          fi
+      
+      # =======================================================================
+      # DETERMINE LABELS
+      # =======================================================================
+      
+      - name: Determine issue labels
+        id: labels
+        if: steps.compare.outputs.changes_detected == 'true' || github.event.inputs.force_issue == 'true'
+        run: |
+          LABELS="openapi-update,automated"
+          
+          # Add breaking-change label if there are breaking changes
+          BREAKING="${{ steps.analyze.outputs.breaking_changes }}"
+          if [ "$BREAKING" != "0" ] && [ "$BREAKING" != "unknown" ] && [ -n "$BREAKING" ]; then
+            LABELS="$LABELS,breaking-change"
+          fi
+          
+          # Add enhancement label if there are new endpoints
+          NEW="${{ steps.analyze.outputs.new_endpoints }}"
+          if [ "$NEW" != "0" ] && [ -n "$NEW" ]; then
+            LABELS="$LABELS,enhancement"
+          fi
+          
+          # Add deprecation label if endpoints were removed
+          REMOVED="${{ steps.analyze.outputs.removed_endpoints }}"
+          if [ "$REMOVED" != "0" ] && [ -n "$REMOVED" ]; then
+            LABELS="$LABELS,deprecation"
+          fi
+          
+          echo "labels=$LABELS" >> $GITHUB_OUTPUT
+          echo "Labels: $LABELS"
+      
+      # =======================================================================
+      # CREATE ISSUE
+      # =======================================================================
+      
+      - name: Create GitHub Issue
+        if: steps.compare.outputs.changes_detected == 'true' || github.event.inputs.force_issue == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            
+            // Read change report if it exists
+            let changeReport = '';
+            try {
+              if (fs.existsSync('change-report.md')) {
+                changeReport = fs.readFileSync('change-report.md', 'utf8');
+              }
+            } catch (e) {
+              console.log('No change report found');
+            }
+            
+            // Build issue body
+            const isNew = '${{ steps.compare.outputs.is_new_spec }}' === 'true';
+            const newEndpoints = '${{ steps.analyze.outputs.new_endpoints }}' || '0';
+            const removedEndpoints = '${{ steps.analyze.outputs.removed_endpoints }}' || '0';
+            const modifiedEndpoints = '${{ steps.analyze.outputs.modified_endpoints }}' || '0';
+            const breakingChanges = '${{ steps.analyze.outputs.breaking_changes }}' || '0';
+            const specVersion = '${{ steps.download.outputs.spec_version }}';
+            const endpointCount = '${{ steps.download.outputs.endpoint_count }}';
+            const date = new Date().toISOString().split('T')[0];
+            
+            let body = `## OpenAPI Specification Update Detected
+            
+            **Date:** ${date}
+            **Spec Version:** ${specVersion}
+            **Total Endpoints:** ${endpointCount}
+            
+            ### Summary
+            
+            | Metric | Count |
+            |--------|-------|
+            | New Endpoints | ${newEndpoints} |
+            | Removed Endpoints | ${removedEndpoints} |
+            | Modified Endpoints | ${modifiedEndpoints} |
+            | Breaking Changes | ${breakingChanges} |
+            
+            ### Action Required
+            
+            ${breakingChanges !== '0' && breakingChanges !== 'unknown' ? 
+              '⚠️ **Breaking changes detected!** Please review carefully before updating.' : 
+              '✅ No breaking changes detected.'}
+            
+            #### Steps to Update
+            
+            1. Review the changes below
+            2. Run the regeneration script:
+               \`\`\`bash
+               ./scripts/regenerate.sh
+               \`\`\`
+            3. Check if any implemented operations are affected
+            4. Update tests if needed
+            5. Create a PR with the changes
+            
+            ---
+            
+            ${changeReport ? '### Detailed Change Report\n\n' + changeReport : ''}
+            
+            ---
+            
+            *This issue was automatically created by the OpenAPI monitoring workflow.*
+            `;
+            
+            // Create the issue
+            const issue = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `🔄 OpenAPI Spec Update Detected (${date})`,
+              body: body,
+              labels: '${{ steps.labels.outputs.labels }}'.split(',').filter(l => l.trim())
+            });
+            
+            console.log(`Created issue #${issue.data.number}`);
+            
+            // Upload the new spec as an artifact reference
+            core.setOutput('issue_number', issue.data.number);
+      
+      # =======================================================================
+      # UPLOAD ARTIFACTS
+      # =======================================================================
+      
+      - name: Upload OpenAPI spec artifact
+        if: steps.compare.outputs.changes_detected == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: openapi-spec-${{ github.run_id }}
+          path: |
+            openapi-latest.json
+            change-report.json
+            change-report.md
+          retention-days: 30
+      
+      # =======================================================================
+      # SUMMARY
+      # =======================================================================
+      
+      - name: Job Summary
+        run: |
+          echo "## OpenAPI Check Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Date:** $(date -u +%Y-%m-%d)" >> $GITHUB_STEP_SUMMARY
+          echo "**Spec Version:** ${{ steps.download.outputs.spec_version }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Total Endpoints:** ${{ steps.download.outputs.endpoint_count }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ steps.compare.outputs.changes_detected }}" = "true" ]; then
+            echo "### ⚠️ Changes Detected" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "| Metric | Count |" >> $GITHUB_STEP_SUMMARY
+            echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+            echo "| New Endpoints | ${{ steps.analyze.outputs.new_endpoints }} |" >> $GITHUB_STEP_SUMMARY
+            echo "| Removed Endpoints | ${{ steps.analyze.outputs.removed_endpoints }} |" >> $GITHUB_STEP_SUMMARY
+            echo "| Modified Endpoints | ${{ steps.analyze.outputs.modified_endpoints }} |" >> $GITHUB_STEP_SUMMARY
+            echo "| Breaking Changes | ${{ steps.analyze.outputs.breaking_changes }} |" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "A GitHub issue has been created with details." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "### ✅ No Changes Detected" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "The OpenAPI specification is up to date." >> $GITHUB_STEP_SUMMARY
+          fi
+
+
+

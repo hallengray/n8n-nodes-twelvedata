@@ -96,3 +96,7 @@ https://github.com/hallengray/n8n-nodes-twelvedata/issues
 
 For security concerns: hallengray@gmail.com
 
+
+
+
+
