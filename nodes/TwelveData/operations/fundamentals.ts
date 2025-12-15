@@ -6,9 +6,9 @@
  * TESTED OPERATIONS (4):
  * - Get Dividends, Get Earnings, Get Profile, Get Statistics
  * 
- * BETA OPERATIONS (11):
- * - Get Balance Sheet, Get Cash Flow, Get Earnings Calendar, Get Income Statement
- * - Get Insider Transactions, Get Institutional Holders, Get IPO Calendar
+ * BETA OPERATIONS (12):
+ * - Get Balance Sheet, Get Cash Flow, Get Earnings Calendar, Get Fund Holders
+ * - Get Income Statement, Get Insider Transactions, Get Institutional Holders, Get IPO Calendar
  * - Get Key Executives, Get Options Chain, Get Options Expiration, Get Stock Splits
  */
 
@@ -77,7 +77,7 @@ export const fundamentalsOperations: INodePropertyOptions[] = [
 		name: 'Get Balance Sheet',
 		value: 'getBalanceSheet',
 		action: 'Get balance sheet',
-		description: 'Get company balance sheet data ✨ BETA - Community testing needed',
+		description: 'Get company balance sheet data',
 		routing: {
 			request: {
 				method: 'GET',
@@ -89,7 +89,7 @@ export const fundamentalsOperations: INodePropertyOptions[] = [
 		name: 'Get Cash Flow',
 		value: 'getCashFlow',
 		action: 'Get cash flow statement',
-		description: 'Get company cash flow statement data ✨ BETA - Community testing needed',
+		description: 'Get company cash flow statement data',
 		routing: {
 			request: {
 				method: 'GET',
@@ -110,10 +110,22 @@ export const fundamentalsOperations: INodePropertyOptions[] = [
 		},
 	},
 	{
+		name: 'Get Fund Holders',
+		value: 'getFundHolders',
+		action: 'Get fund holders',
+		description: 'Get mutual fund ownership data ✨ BETA - Community testing needed',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '/fund_holders',
+			},
+		},
+	},
+	{
 		name: 'Get Income Statement',
 		value: 'getIncomeStatement',
 		action: 'Get income statement',
-		description: 'Get company income statement data ✨ BETA - Community testing needed',
+		description: 'Get company income statement data',
 		routing: {
 			request: {
 				method: 'GET',
@@ -125,7 +137,7 @@ export const fundamentalsOperations: INodePropertyOptions[] = [
 		name: 'Get Insider Transactions',
 		value: 'getInsiderTransactions',
 		action: 'Get insider transactions',
-		description: 'Get insider buying and selling activity ✨ BETA - Community testing needed',
+		description: 'Get insider buying and selling activity',
 		routing: {
 			request: {
 				method: 'GET',
@@ -137,7 +149,7 @@ export const fundamentalsOperations: INodePropertyOptions[] = [
 		name: 'Get Institutional Holders',
 		value: 'getInstitutionalHolders',
 		action: 'Get institutional holders',
-		description: 'Get institutional ownership data ✨ BETA - Community testing needed',
+		description: 'Get institutional ownership data',
 		routing: {
 			request: {
 				method: 'GET',
@@ -161,7 +173,7 @@ export const fundamentalsOperations: INodePropertyOptions[] = [
 		name: 'Get Key Executives',
 		value: 'getKeyExecutives',
 		action: 'Get key executives',
-		description: 'Get company executive and management information ✨ BETA - Community testing needed',
+		description: 'Get company executive and management information',
 		routing: {
 			request: {
 				method: 'GET',
@@ -173,7 +185,7 @@ export const fundamentalsOperations: INodePropertyOptions[] = [
 		name: 'Get Options Chain',
 		value: 'getOptionsChain',
 		action: 'Get options chain',
-		description: 'Get full options chain data ✨ BETA - Community testing needed',
+		description: '🚧 PLANNED API ENDPOINT - Not yet available in REST API (currently only in Google Sheets Add-on). Expected in future Twelve Data API release.',
 		routing: {
 			request: {
 				method: 'GET',
@@ -185,7 +197,7 @@ export const fundamentalsOperations: INodePropertyOptions[] = [
 		name: 'Get Options Expiration',
 		value: 'getOptionsExpiration',
 		action: 'Get options expiration dates',
-		description: 'Get available options expiration dates ✨ BETA - Community testing needed',
+		description: '🚧 PLANNED API ENDPOINT - Not yet available in REST API (currently only in Google Sheets Add-on). Expected in future Twelve Data API release.',
 		routing: {
 			request: {
 				method: 'GET',
@@ -197,7 +209,7 @@ export const fundamentalsOperations: INodePropertyOptions[] = [
 		name: 'Get Stock Splits',
 		value: 'getStockSplits',
 		action: 'Get stock splits',
-		description: 'Get historical stock split data ✨ BETA - Community testing needed',
+		description: 'Get historical stock split data',
 		routing: {
 			request: {
 				method: 'GET',

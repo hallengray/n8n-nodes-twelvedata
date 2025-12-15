@@ -3,11 +3,11 @@
  * 
  * These operations provide calendars, analyst data, and performance metrics.
  * 
- * ALL OPERATIONS ARE BETA (10 total):
- * - Get Analyst Ratings, Get Commodities Performance, Get Crypto Heatmap
- * - Get Economic Calendar, Get Forex Heatmap, Get Indices Performance
- * - Get Market Overview, Get Price Target, Get Recommendations Trends
- * - Get Sector Performance
+ * All 7 operations have been tested and are production-ready:
+ * - Get Analyst Ratings, Get Earnings Estimate, Get EPS Trend
+ * - Get Growth Estimates, Get Price Target, Get Recommendations, Get Revenue Estimate
+ * 
+ * NOTE: Economic Calendar endpoint does not exist in Twelve Data API (removed from codebase)
  */
 
 import type { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
@@ -21,23 +21,11 @@ export const marketIntelligenceOperations: INodePropertyOptions[] = [
 		name: 'Get Analyst Ratings',
 		value: 'getAnalystRatings',
 		action: 'Get analyst ratings',
-		description: 'Get analyst ratings and recommendations ✨ BETA - Community testing needed',
+		description: 'Get analyst ratings and recommendations',
 		routing: {
 			request: {
 				method: 'GET',
-				url: '/analyst_ratings',
-			},
-		},
-	},
-	{
-		name: 'Get Economic Calendar',
-		value: 'getEconomicCalendar',
-		action: 'Get economic calendar',
-		description: 'Get upcoming economic events and releases ✨ BETA - Community testing needed',
-		routing: {
-			request: {
-				method: 'GET',
-				url: '/economic_calendar',
+				url: '/analyst_ratings/us_equities',
 			},
 		},
 	},
@@ -45,7 +33,7 @@ export const marketIntelligenceOperations: INodePropertyOptions[] = [
 		name: 'Get Earnings Estimate',
 		value: 'getEarningsEstimate',
 		action: 'Get earnings estimate',
-		description: 'Get analyst earnings estimates ✨ BETA - Community testing needed',
+		description: 'Get analyst earnings estimates',
 		routing: {
 			request: {
 				method: 'GET',
@@ -57,7 +45,7 @@ export const marketIntelligenceOperations: INodePropertyOptions[] = [
 		name: 'Get EPS Trend',
 		value: 'getEpsTrend',
 		action: 'Get EPS trend',
-		description: 'Get earnings per share trend data ✨ BETA - Community testing needed',
+		description: 'Get earnings per share trend data',
 		routing: {
 			request: {
 				method: 'GET',
@@ -69,7 +57,7 @@ export const marketIntelligenceOperations: INodePropertyOptions[] = [
 		name: 'Get Growth Estimates',
 		value: 'getGrowthEstimates',
 		action: 'Get growth estimates',
-		description: 'Get analyst growth estimates ✨ BETA - Community testing needed',
+		description: 'Get analyst growth estimates',
 		routing: {
 			request: {
 				method: 'GET',
@@ -81,7 +69,7 @@ export const marketIntelligenceOperations: INodePropertyOptions[] = [
 		name: 'Get Price Target',
 		value: 'getPriceTarget',
 		action: 'Get price target',
-		description: 'Get analyst price targets ✨ BETA - Community testing needed',
+		description: 'Get analyst price targets',
 		routing: {
 			request: {
 				method: 'GET',
@@ -93,7 +81,7 @@ export const marketIntelligenceOperations: INodePropertyOptions[] = [
 		name: 'Get Recommendations',
 		value: 'getRecommendations',
 		action: 'Get recommendations',
-		description: 'Get analyst recommendation trends ✨ BETA - Community testing needed',
+		description: 'Get analyst recommendation trends',
 		routing: {
 			request: {
 				method: 'GET',
@@ -105,7 +93,7 @@ export const marketIntelligenceOperations: INodePropertyOptions[] = [
 		name: 'Get Revenue Estimate',
 		value: 'getRevenueEstimate',
 		action: 'Get revenue estimate',
-		description: 'Get analyst revenue estimates ✨ BETA - Community testing needed',
+		description: 'Get analyst revenue estimates',
 		routing: {
 			request: {
 				method: 'GET',
@@ -134,9 +122,6 @@ export const marketIntelligenceSymbolParameter: INodeProperties = {
 		show: {
 			resource: ['marketIntelligence'],
 		},
-		hide: {
-			operation: ['getEconomicCalendar'],
-		},
 	},
 	routing: {
 		send: {
@@ -158,9 +143,6 @@ export const marketIntelligenceOptions: INodeProperties = {
 	displayOptions: {
 		show: {
 			resource: ['marketIntelligence'],
-		},
-		hide: {
-			operation: ['getEconomicCalendar'],
 		},
 	},
 	options: [
@@ -195,86 +177,6 @@ export const marketIntelligenceOptions: INodeProperties = {
 	],
 };
 
-/**
- * Economic Calendar options
- */
-export const economicCalendarOptions: INodeProperties = {
-	displayName: 'Calendar Options',
-	name: 'economicCalendarOptions',
-	type: 'collection',
-	placeholder: 'Add Option',
-	default: {},
-	displayOptions: {
-		show: {
-			resource: ['marketIntelligence'],
-			operation: ['getEconomicCalendar'],
-		},
-	},
-	options: [
-		{
-			displayName: 'Country',
-			name: 'country',
-			type: 'string',
-			default: '',
-			placeholder: 'e.g., United States, Germany',
-			description: 'Filter by country',
-			routing: {
-				send: {
-					type: 'query',
-					property: 'country',
-				},
-			},
-		},
-		{
-			displayName: 'End Date',
-			name: 'end_date',
-			type: 'string',
-			default: '',
-			placeholder: 'e.g., 2024-12-31',
-			description: 'End date for calendar range (format: YYYY-MM-DD)',
-			routing: {
-				send: {
-					type: 'query',
-					property: 'end_date',
-				},
-			},
-		},
-		{
-			displayName: 'Importance',
-			name: 'importance',
-			type: 'options',
-			default: '',
-			description: 'Filter by event importance',
-			options: [
-				{ name: 'All', value: '' },
-				{ name: 'Low', value: 'low' },
-				{ name: 'Medium', value: 'medium' },
-				{ name: 'High', value: 'high' },
-			],
-			routing: {
-				send: {
-					type: 'query',
-					property: 'importance',
-					value: '={{$value || undefined}}',
-				},
-			},
-		},
-		{
-			displayName: 'Start Date',
-			name: 'start_date',
-			type: 'string',
-			default: '',
-			placeholder: 'e.g., 2024-01-01',
-			description: 'Start date for calendar range (format: YYYY-MM-DD)',
-			routing: {
-				send: {
-					type: 'query',
-					property: 'start_date',
-				},
-			},
-		},
-	],
-};
 
 // =============================================================================
 // EXPORT ALL MARKET INTELLIGENCE PARAMETERS
@@ -283,7 +185,6 @@ export const economicCalendarOptions: INodeProperties = {
 export const allMarketIntelligenceParameters: INodeProperties[] = [
 	marketIntelligenceSymbolParameter,
 	marketIntelligenceOptions,
-	economicCalendarOptions,
 ];
 
 

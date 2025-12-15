@@ -101,7 +101,7 @@ export const coreDataOperations: INodePropertyOptions[] = [
 		name: 'Get Complex Data',
 		value: 'getComplexData',
 		action: 'Get complex data for multiple symbols',
-		description: 'Get multiple data types for multiple symbols in one request ✨ BETA - Community testing needed',
+		description: '🚧 PLANNED API ENDPOINT - Not yet available in REST API. Expected in future Twelve Data API release.',
 		routing: {
 			request: {
 				method: 'GET',
@@ -113,7 +113,7 @@ export const coreDataOperations: INodePropertyOptions[] = [
 		name: 'Get Earliest Timestamp',
 		value: 'getEarliestTimestamp',
 		action: 'Get earliest available timestamp',
-		description: 'Get the earliest available data timestamp for a symbol ✨ BETA - Community testing needed',
+		description: 'Get the earliest available data timestamp for a symbol',
 		routing: {
 			request: {
 				method: 'GET',

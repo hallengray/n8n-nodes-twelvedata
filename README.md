@@ -90,7 +90,7 @@ For quick testing, use the demo API key: `demo`
 
 ### Available Operations
 
-The Twelve Data node provides access to 184+ API endpoints organized into 4 main resource categories:
+The Twelve Data node provides access to **142 API endpoints** organized into 6 main resource categories:
 
 #### Core Data (Market Data)
 - **Get Quote** - Real-time price quotes with bid, ask, open, high, low, close, volume
@@ -110,20 +110,48 @@ The Twelve Data node provides access to 184+ API endpoints organized into 4 main
 - **Symbol Search** - Search for symbols by name or ticker
 - **Get Market State** - Check if markets are open or closed
 
-#### Analysis
-- **Get Technical Indicator** - Calculate technical indicators (SMA, EMA, RSI, MACD, etc.)
-  - *Note: Full indicator implementation coming in future releases*
+#### Technical Indicators (91 operations)
+- **Moving Averages** (9): SMA, EMA, DEMA, TEMA, WMA, TRIMA, KAMA, MAMA, T3
+- **Momentum Indicators** (16): RSI, MACD, ADX, CCI, MOM, ROC, STOCH, TRIX, etc.
+- **Volatility Indicators** (5): ATR, BBANDS, NATR, SUPERTREND, TRANGE
+- **Volume Indicators** (4): AD, ADOSC, OBV, VWAP
+- **Trend Indicators** (10): AROON, SAR, ICHIMOKU, HT_TRENDMODE, etc.
+- **Statistical Functions** (9): BETA, CORREL, LINEARREG, STDDEV, VAR, etc.
+- **Overlap Studies** (14): AVGPRICE, MEDPRICE, MIDPOINT, TYPPRICE, etc.
+- **Math Transform** (25): ACOS, ADD, ASIN, ATAN, COS, EXP, LN, LOG10, MAX, MIN, etc.
 
-#### Fundamentals
+#### Fundamentals (16 operations)
 - **Get Profile** - Company information (sector, industry, employees, description)
 - **Get Dividends** - Historical dividend payment records
 - **Get Earnings** - Historical and upcoming earnings data
 - **Get Statistics** - Key financial statistics and metrics
+- **Get Balance Sheet** - Company balance sheet data
+- **Get Cash Flow** - Cash flow statement data
+- **Get Income Statement** - Income statement data
+- **Get Fund Holders** - Mutual fund ownership data
+- **Get Insider Transactions** - Insider buying and selling activity
+- **Get Institutional Holders** - Institutional ownership data
+- **Get Key Executives** - Company executive information
+- **Get Earnings Calendar** - Upcoming earnings announcements
+- **Get IPO Calendar** - Upcoming IPO listings
+- **Get Stock Splits** - Historical stock split data
+- **Get Options Chain** - 🚧 Planned API endpoint
+- **Get Options Expiration** - 🚧 Planned API endpoint
 
-#### Analysis
-- **Analyst ratings** - Consensus recommendations
-- **Price targets** - Analyst price predictions
-- **Earnings estimates** - Forward-looking estimates
+#### Market Intelligence (8 operations)
+- **Get Analyst Ratings** - Consensus recommendations
+- **Get Price Target** - Analyst price predictions
+- **Get Recommendations** - Recommendation trends
+- **Get Earnings Estimate** - Forward-looking earnings estimates
+- **Get Revenue Estimate** - Revenue estimates
+- **Get EPS Trend** - Earnings per share trend data
+- **Get Growth Estimates** - Growth estimates
+- **Get Economic Calendar** - Upcoming economic events
+
+#### Advanced (3 operations)
+- **API Usage** - Get API usage statistics and remaining credits
+- **Batch Request** - Get multiple data types for multiple symbols in one request
+- **Get Logo** - Get company logo URL
 
 ### Example Workflows
 
@@ -226,6 +254,20 @@ Based on testing, the following endpoints require a paid plan:
 - **Get Dividends** (FD-002) - Returns 403 Forbidden on free tier
 - **Get Earnings** (FD-003) - Returns 403 Forbidden on free tier
 - **Get Statistics** (FD-004) - Returns 403 Forbidden on free tier
+
+### Planned Endpoints (Not Yet Available)
+
+The following endpoints are defined in the node but not yet available in the Twelve Data REST API:
+
+- **Get Options Chain** - Returns 404 "The options unavailable"
+- **Get Options Expiration** - Returns 404 "The options unavailable"
+- **Get Complex Data** - Returns 404 "The resource you are requesting could not be found"
+
+**Status:** These endpoints are expected to be added to the REST API in a future release. The options endpoints are currently only available in the [Twelve Data Google Sheets Add-on](https://support.twelvedata.com/en/articles/5702399-google-sheets-add-on-documentation). The operations remain in the node for future compatibility.
+
+**Workarounds:**
+- For options data: Use the Twelve Data Google Sheets Add-on
+- For complex data: Make separate API calls for each symbol and data type using n8n loops
 
 ### Interval Limitations
 

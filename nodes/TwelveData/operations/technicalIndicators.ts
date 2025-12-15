@@ -28,7 +28,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'DEMA - Double Exponential Moving Average',
 		value: 'dema',
 		action: 'Calculate DEMA indicator',
-		description: 'Double Exponential Moving Average - reduces lag ✨ BETA',
+		description: 'Double Exponential Moving Average - reduces lag',
 		routing: {
 			request: {
 				method: 'GET',
@@ -40,7 +40,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'EMA - Exponential Moving Average',
 		value: 'ema',
 		action: 'Calculate EMA indicator',
-		description: 'Exponential Moving Average - weighted toward recent prices ✨ BETA',
+		description: 'Exponential Moving Average - weighted toward recent prices',
 		routing: {
 			request: {
 				method: 'GET',
@@ -52,7 +52,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'KAMA - Kaufman Adaptive Moving Average',
 		value: 'kama',
 		action: 'Calculate KAMA indicator',
-		description: 'Kaufman Adaptive Moving Average - adjusts to market volatility ✨ BETA',
+		description: 'Kaufman Adaptive Moving Average - adjusts to market volatility',
 		routing: {
 			request: {
 				method: 'GET',
@@ -64,7 +64,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'MAMA - MESA Adaptive Moving Average',
 		value: 'mama',
 		action: 'Calculate MAMA indicator',
-		description: 'MESA Adaptive Moving Average - adapts to price cycles ✨ BETA',
+		description: 'MESA Adaptive Moving Average - adapts to price cycles',
 		routing: {
 			request: {
 				method: 'GET',
@@ -76,7 +76,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'SMA - Simple Moving Average',
 		value: 'sma',
 		action: 'Calculate SMA indicator',
-		description: 'Simple Moving Average - basic price average ✨ BETA',
+		description: 'Simple Moving Average - basic price average',
 		routing: {
 			request: {
 				method: 'GET',
@@ -85,14 +85,14 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		},
 	},
 	{
-		name: 'T3 - Triple Exponential Moving Average',
-		value: 't3',
-		action: 'Calculate T3 indicator',
-		description: 'Triple Exponential Moving Average - smoother than EMA ✨ BETA',
+		name: 'T3MA - Triple Exponential Moving Average',
+		value: 't3ma',
+		action: 'Calculate T3MA indicator',
+		description: 'Triple Exponential Moving Average - smoother than EMA',
 		routing: {
 			request: {
 				method: 'GET',
-				url: '/t3',
+				url: '/t3ma',
 			},
 		},
 	},
@@ -100,7 +100,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'TEMA - Triple Exponential Moving Average',
 		value: 'tema',
 		action: 'Calculate TEMA indicator',
-		description: 'Triple Exponential Moving Average - reduces lag significantly ✨ BETA',
+		description: 'Triple Exponential Moving Average - reduces lag significantly',
 		routing: {
 			request: {
 				method: 'GET',
@@ -112,7 +112,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'TRIMA - Triangular Moving Average',
 		value: 'trima',
 		action: 'Calculate TRIMA indicator',
-		description: 'Triangular Moving Average - double smoothed ✨ BETA',
+		description: 'Triangular Moving Average - double smoothed',
 		routing: {
 			request: {
 				method: 'GET',
@@ -124,7 +124,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'WMA - Weighted Moving Average',
 		value: 'wma',
 		action: 'Calculate WMA indicator',
-		description: 'Weighted Moving Average - linear weighted ✨ BETA',
+		description: 'Weighted Moving Average - linear weighted',
 		routing: {
 			request: {
 				method: 'GET',
@@ -139,7 +139,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'ADX - Average Directional Index',
 		value: 'adx',
 		action: 'Calculate ADX indicator',
-		description: 'Average Directional Index - measures trend strength ✨ BETA',
+		description: 'Average Directional Index - measures trend strength',
 		routing: {
 			request: {
 				method: 'GET',
@@ -151,7 +151,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'ADXR - Average Directional Movement Index Rating',
 		value: 'adxr',
 		action: 'Calculate ADXR indicator',
-		description: 'Average Directional Movement Index Rating ✨ BETA',
+		description: 'Average Directional Movement Index Rating',
 		routing: {
 			request: {
 				method: 'GET',
@@ -163,7 +163,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'APO - Absolute Price Oscillator',
 		value: 'apo',
 		action: 'Calculate APO indicator',
-		description: 'Absolute Price Oscillator - difference between two EMAs ✨ BETA',
+		description: 'Absolute Price Oscillator - difference between two EMAs',
 		routing: {
 			request: {
 				method: 'GET',
@@ -175,7 +175,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'CCI - Commodity Channel Index',
 		value: 'cci',
 		action: 'Calculate CCI indicator',
-		description: 'Commodity Channel Index - identifies overbought/oversold ✨ BETA',
+		description: 'Commodity Channel Index - identifies overbought/oversold',
 		routing: {
 			request: {
 				method: 'GET',
@@ -187,7 +187,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'CMO - Chande Momentum Oscillator',
 		value: 'cmo',
 		action: 'Calculate CMO indicator',
-		description: 'Chande Momentum Oscillator - momentum indicator ✨ BETA',
+		description: 'Chande Momentum Oscillator - momentum indicator',
 		routing: {
 			request: {
 				method: 'GET',
@@ -199,7 +199,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'DX - Directional Movement Index',
 		value: 'dx',
 		action: 'Calculate DX indicator',
-		description: 'Directional Movement Index ✨ BETA',
+		description: 'Directional Movement Index',
 		routing: {
 			request: {
 				method: 'GET',
@@ -211,7 +211,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'MACD - Moving Average Convergence Divergence',
 		value: 'macd',
 		action: 'Calculate MACD indicator',
-		description: 'Moving Average Convergence Divergence - trend following ✨ BETA',
+		description: 'Moving Average Convergence Divergence - trend following',
 		routing: {
 			request: {
 				method: 'GET',
@@ -223,7 +223,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'MFI - Money Flow Index',
 		value: 'mfi',
 		action: 'Calculate MFI indicator',
-		description: 'Money Flow Index - volume-weighted RSI ✨ BETA',
+		description: 'Money Flow Index - volume-weighted RSI',
 		routing: {
 			request: {
 				method: 'GET',
@@ -235,7 +235,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'MOM - Momentum',
 		value: 'mom',
 		action: 'Calculate Momentum indicator',
-		description: 'Momentum - rate of price change ✨ BETA',
+		description: 'Momentum - rate of price change',
 		routing: {
 			request: {
 				method: 'GET',
@@ -247,7 +247,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'PPO - Percentage Price Oscillator',
 		value: 'ppo',
 		action: 'Calculate PPO indicator',
-		description: 'Percentage Price Oscillator - percentage MACD ✨ BETA',
+		description: 'Percentage Price Oscillator - percentage MACD',
 		routing: {
 			request: {
 				method: 'GET',
@@ -271,7 +271,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'RSI - Relative Strength Index',
 		value: 'rsi',
 		action: 'Calculate RSI indicator',
-		description: 'Relative Strength Index - momentum oscillator ✨ BETA',
+		description: 'Relative Strength Index - momentum oscillator',
 		routing: {
 			request: {
 				method: 'GET',
@@ -283,7 +283,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'STOCH - Stochastic Oscillator',
 		value: 'stoch',
 		action: 'Calculate Stochastic indicator',
-		description: 'Stochastic Oscillator - compares closing price to range ✨ BETA',
+		description: 'Stochastic Oscillator - compares closing price to range',
 		routing: {
 			request: {
 				method: 'GET',
@@ -319,7 +319,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'ULTOSC - Ultimate Oscillator',
 		value: 'ultosc',
 		action: 'Calculate Ultimate Oscillator',
-		description: 'Ultimate Oscillator - multi-timeframe momentum ✨ BETA',
+		description: 'Ultimate Oscillator - multi-timeframe momentum',
 		routing: {
 			request: {
 				method: 'GET',
@@ -331,7 +331,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'WILLR - Williams %R',
 		value: 'willr',
 		action: 'Calculate Williams %R indicator',
-		description: 'Williams %R - overbought/oversold indicator ✨ BETA',
+		description: 'Williams %R - overbought/oversold indicator',
 		routing: {
 			request: {
 				method: 'GET',
@@ -346,7 +346,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'ATR - Average True Range',
 		value: 'atr',
 		action: 'Calculate ATR indicator',
-		description: 'Average True Range - measures volatility ✨ BETA',
+		description: 'Average True Range - measures volatility',
 		routing: {
 			request: {
 				method: 'GET',
@@ -358,7 +358,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'BBANDS - Bollinger Bands',
 		value: 'bbands',
 		action: 'Calculate Bollinger Bands',
-		description: 'Bollinger Bands - volatility bands around SMA ✨ BETA',
+		description: 'Bollinger Bands - volatility bands around SMA',
 		routing: {
 			request: {
 				method: 'GET',
@@ -370,7 +370,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'NATR - Normalized Average True Range',
 		value: 'natr',
 		action: 'Calculate NATR indicator',
-		description: 'Normalized Average True Range - percentage ATR ✨ BETA',
+		description: 'Normalized Average True Range - percentage ATR',
 		routing: {
 			request: {
 				method: 'GET',
@@ -382,7 +382,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'SUPERTREND - SuperTrend',
 		value: 'supertrend',
 		action: 'Calculate SuperTrend indicator',
-		description: 'SuperTrend - trend following indicator ✨ BETA',
+		description: 'SuperTrend - trend following indicator',
 		routing: {
 			request: {
 				method: 'GET',
@@ -433,7 +433,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'OBV - On Balance Volume',
 		value: 'obv',
 		action: 'Calculate OBV indicator',
-		description: 'On Balance Volume - cumulative volume indicator ✨ BETA',
+		description: 'On Balance Volume - cumulative volume indicator',
 		routing: {
 			request: {
 				method: 'GET',
@@ -445,7 +445,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'VWAP - Volume Weighted Average Price',
 		value: 'vwap',
 		action: 'Calculate VWAP',
-		description: 'Volume Weighted Average Price ✨ BETA',
+		description: 'Volume Weighted Average Price',
 		routing: {
 			request: {
 				method: 'GET',
@@ -460,7 +460,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'AROON - Aroon Indicator',
 		value: 'aroon',
 		action: 'Calculate Aroon indicator',
-		description: 'Aroon Indicator - identifies trend changes ✨ BETA',
+		description: 'Aroon Indicator - identifies trend changes',
 		routing: {
 			request: {
 				method: 'GET',
@@ -472,7 +472,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'AROONOSC - Aroon Oscillator',
 		value: 'aroonosc',
 		action: 'Calculate Aroon Oscillator',
-		description: 'Aroon Oscillator - difference between Aroon Up and Down ✨ BETA',
+		description: 'Aroon Oscillator - difference between Aroon Up and Down',
 		routing: {
 			request: {
 				method: 'GET',
@@ -484,7 +484,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'BOP - Balance of Power',
 		value: 'bop',
 		action: 'Calculate Balance of Power',
-		description: 'Balance of Power - measures buying/selling pressure ✨ BETA',
+		description: 'Balance of Power - measures buying/selling pressure',
 		routing: {
 			request: {
 				method: 'GET',
@@ -508,7 +508,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'MINUS_DI - Minus Directional Indicator',
 		value: 'minus_di',
 		action: 'Calculate Minus DI',
-		description: 'Minus Directional Indicator - downward trend strength ✨ BETA',
+		description: 'Minus Directional Indicator - downward trend strength',
 		routing: {
 			request: {
 				method: 'GET',
@@ -532,7 +532,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'PLUS_DI - Plus Directional Indicator',
 		value: 'plus_di',
 		action: 'Calculate Plus DI',
-		description: 'Plus Directional Indicator - upward trend strength ✨ BETA',
+		description: 'Plus Directional Indicator - upward trend strength',
 		routing: {
 			request: {
 				method: 'GET',
@@ -568,7 +568,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'ICHIMOKU - Ichimoku Cloud',
 		value: 'ichimoku',
 		action: 'Calculate Ichimoku Cloud',
-		description: 'Ichimoku Kinko Hyo - comprehensive trend indicator ✨ BETA',
+		description: 'Ichimoku Kinko Hyo - comprehensive trend indicator',
 		routing: {
 			request: {
 				method: 'GET',
@@ -655,7 +655,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'STDDEV - Standard Deviation',
 		value: 'stddev',
 		action: 'Calculate Standard Deviation',
-		description: 'Standard Deviation - measures dispersion ✨ BETA',
+		description: 'Standard Deviation - measures dispersion',
 		routing: {
 			request: {
 				method: 'GET',
@@ -694,7 +694,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'AVGPRICE - Average Price',
 		value: 'avgprice',
 		action: 'Calculate Average Price',
-		description: 'Average of OHLC prices ✨ BETA',
+		description: 'Average of OHLC prices',
 		routing: {
 			request: {
 				method: 'GET',
@@ -802,7 +802,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'PERCENT_B - Bollinger Bands %B',
 		value: 'percent_b',
 		action: 'Calculate Percent B',
-		description: 'Bollinger Bands %B - position within bands ✨ BETA',
+		description: 'Bollinger Bands %B - position within bands',
 		routing: {
 			request: {
 				method: 'GET',
@@ -997,7 +997,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'MAX - Maximum Value',
 		value: 'max',
 		action: 'Calculate Maximum',
-		description: 'Highest value over period ✨ BETA',
+		description: 'Highest value over period',
 		routing: {
 			request: {
 				method: 'GET',
@@ -1141,7 +1141,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'TANH - Hyperbolic Tangent',
 		value: 'tanh',
 		action: 'Calculate Hyperbolic Tangent',
-		description: 'Vector Trigonometric Tanh ✨ BETA',
+		description: 'Vector Trigonometric Tanh',
 		routing: {
 			request: {
 				method: 'GET',

@@ -689,4 +689,3 @@ export const allIndicatorParameters: INodeProperties[] = [
 	supertrendMultiplierParameter,
 	indicatorAdditionalOptions,
 ];
-
