@@ -1,0 +1,29 @@
+# Screenshots Directory
+
+This directory contains screenshot evidence for test cases documented in TESTING_LOG.md.
+
+## Naming Convention
+
+Screenshots should follow this naming pattern:
+- `test-[TEST-ID]-[operation-name].png`
+
+## Examples
+- `test-cd-001-convert-currency.png`
+- `test-fd-001-get-profile.png`
+- `test-er-001-invalid-symbol.png`
+- `test-pv-001-quote-stock.png`
+
+## Test ID Prefixes
+- `cd-` = Core Data Operations
+- `fd-` = Fundamentals Operations
+- `rd-` = Reference Data Operations
+- `er-` = Error Handling Tests
+- `pv-` = Parameter Variation Tests
+
+## Notes
+- Take screenshots that show both the node configuration and the execution result
+- Ensure sensitive data (API keys) are not visible in screenshots
+- Use PNG format for best quality
+
+
+
