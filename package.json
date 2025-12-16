@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-twelve-data",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "n8n community node for Twelve Data API - Access financial market data for stocks, forex, crypto, ETFs, and more",
 	"license": "MIT",
 	"homepage": "https://github.com/hallengray/n8n-nodes-twelvedata",
