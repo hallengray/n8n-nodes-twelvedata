@@ -126,7 +126,7 @@ export const referenceDataOperations: INodePropertyOptions[] = [
 		name: 'Get Cross Listings',
 		value: 'getCrossListings',
 		action: 'Get cross listings',
-		description: 'Get cross-listed symbols for a security ✨ BETA - Community testing needed',
+		description: 'Get cross-listed symbols for a security',
 		routing: {
 			request: {
 				method: 'GET',
@@ -138,7 +138,7 @@ export const referenceDataOperations: INodePropertyOptions[] = [
 		name: 'Get Exchanges Schedule',
 		value: 'getExchangesSchedule',
 		action: 'Get exchanges schedule',
-		description: 'Get trading hours and holidays for exchanges ✨ BETA - Community testing needed',
+		description: 'Get trading hours and holidays for exchanges',
 		routing: {
 			request: {
 				method: 'GET',
@@ -150,7 +150,7 @@ export const referenceDataOperations: INodePropertyOptions[] = [
 		name: 'Get Instrument Type',
 		value: 'getInstrumentType',
 		action: 'Get instrument type',
-		description: 'Get the type of a financial instrument ✨ BETA - Community testing needed',
+		description: 'Get the type of a financial instrument',
 		routing: {
 			request: {
 				method: 'GET',
@@ -162,7 +162,7 @@ export const referenceDataOperations: INodePropertyOptions[] = [
 		name: 'List Bonds',
 		value: 'listBonds',
 		action: 'List bonds',
-		description: 'Get a list of available bond instruments ✨ BETA - Community testing needed',
+		description: 'Get a list of available bond instruments',
 		routing: {
 			request: {
 				method: 'GET',
@@ -174,7 +174,7 @@ export const referenceDataOperations: INodePropertyOptions[] = [
 		name: 'List Commodities',
 		value: 'listCommodities',
 		action: 'List commodities',
-		description: 'Get a list of available commodity instruments ✨ BETA - Community testing needed',
+		description: 'Get a list of available commodity instruments',
 		routing: {
 			request: {
 				method: 'GET',
@@ -186,7 +186,7 @@ export const referenceDataOperations: INodePropertyOptions[] = [
 		name: 'List Cryptocurrency Exchanges',
 		value: 'listCryptoExchanges',
 		action: 'List cryptocurrency exchanges',
-		description: 'Get a list of available cryptocurrency exchanges ✨ BETA - Community testing needed',
+		description: 'Get a list of available cryptocurrency exchanges',
 		routing: {
 			request: {
 				method: 'GET',
@@ -198,7 +198,7 @@ export const referenceDataOperations: INodePropertyOptions[] = [
 		name: 'List Funds',
 		value: 'listFunds',
 		action: 'List mutual funds',
-		description: 'Get a list of available mutual fund symbols ✨ BETA - Community testing needed',
+		description: 'Get a list of available mutual fund symbols',
 		routing: {
 			request: {
 				method: 'GET',
@@ -505,6 +505,8 @@ export const allReferenceDataParameters: INodeProperties[] = [
 	referenceDataMarketStateOptions,
 	referenceDataExchangeScheduleOptions,
 ];
+
+
 
 
 

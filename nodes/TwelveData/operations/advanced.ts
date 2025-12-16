@@ -18,7 +18,7 @@ export const advancedOperations: INodePropertyOptions[] = [
 		name: 'API Usage',
 		value: 'getApiUsage',
 		action: 'Get API usage statistics',
-		description: 'Get your API usage and remaining credits ✨ BETA - Community testing needed',
+		description: 'Get your API usage and remaining credits',
 		routing: {
 			request: {
 				method: 'GET',
@@ -30,7 +30,7 @@ export const advancedOperations: INodePropertyOptions[] = [
 		name: 'Batch Request',
 		value: 'batchRequest',
 		action: 'Make batch request',
-		description: 'Get multiple data types for multiple symbols in one request ✨ BETA - Community testing needed',
+		description: 'Get multiple data types for multiple symbols in one request',
 		routing: {
 			request: {
 				method: 'GET',
@@ -42,7 +42,7 @@ export const advancedOperations: INodePropertyOptions[] = [
 		name: 'Get Logo',
 		value: 'getLogo',
 		action: 'Get company logo',
-		description: 'Get company logo URL ✨ BETA - Community testing needed',
+		description: 'Get company logo URL',
 		routing: {
 			request: {
 				method: 'GET',

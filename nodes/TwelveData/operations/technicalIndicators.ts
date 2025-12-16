@@ -259,7 +259,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'ROC - Rate of Change',
 		value: 'roc',
 		action: 'Calculate ROC indicator',
-		description: 'Rate of Change - percentage price change ✨ BETA',
+		description: 'Rate of Change - percentage price change',
 		routing: {
 			request: {
 				method: 'GET',
@@ -295,7 +295,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'STOCHRSI - Stochastic RSI',
 		value: 'stochrsi',
 		action: 'Calculate Stochastic RSI indicator',
-		description: 'Stochastic RSI - stochastic of RSI ✨ BETA',
+		description: 'Stochastic RSI - stochastic of RSI',
 		routing: {
 			request: {
 				method: 'GET',
@@ -307,7 +307,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'TRIX - Triple Exponential Average',
 		value: 'trix',
 		action: 'Calculate TRIX indicator',
-		description: 'Triple Exponential Average - momentum oscillator ✨ BETA',
+		description: 'Triple Exponential Average - momentum oscillator',
 		routing: {
 			request: {
 				method: 'GET',
@@ -394,7 +394,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'TRANGE - True Range',
 		value: 'trange',
 		action: 'Calculate True Range',
-		description: 'True Range - single period volatility ✨ BETA',
+		description: 'True Range - single period volatility',
 		routing: {
 			request: {
 				method: 'GET',
@@ -409,7 +409,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'AD - Accumulation/Distribution',
 		value: 'ad',
 		action: 'Calculate A/D indicator',
-		description: 'Accumulation/Distribution - volume-based indicator ✨ BETA',
+		description: 'Accumulation/Distribution - volume-based indicator',
 		routing: {
 			request: {
 				method: 'GET',
@@ -421,7 +421,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'ADOSC - Chaikin A/D Oscillator',
 		value: 'adosc',
 		action: 'Calculate Chaikin A/D Oscillator',
-		description: 'Chaikin A/D Oscillator - momentum of A/D line ✨ BETA',
+		description: 'Chaikin A/D Oscillator - momentum of A/D line',
 		routing: {
 			request: {
 				method: 'GET',
@@ -520,7 +520,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'MINUS_DM - Minus Directional Movement',
 		value: 'minus_dm',
 		action: 'Calculate Minus DM',
-		description: 'Minus Directional Movement ✨ BETA',
+		description: 'Minus Directional Movement',
 		routing: {
 			request: {
 				method: 'GET',
@@ -544,7 +544,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'PLUS_DM - Plus Directional Movement',
 		value: 'plus_dm',
 		action: 'Calculate Plus DM',
-		description: 'Plus Directional Movement ✨ BETA',
+		description: 'Plus Directional Movement',
 		routing: {
 			request: {
 				method: 'GET',
@@ -556,7 +556,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'SAR - Parabolic SAR',
 		value: 'sar',
 		action: 'Calculate Parabolic SAR',
-		description: 'Parabolic Stop and Reverse - trend following ✨ BETA',
+		description: 'Parabolic Stop and Reverse - trend following',
 		routing: {
 			request: {
 				method: 'GET',
@@ -583,7 +583,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'BETA - Beta Coefficient',
 		value: 'beta',
 		action: 'Calculate Beta',
-		description: 'Beta - measures volatility relative to market ✨ BETA',
+		description: 'Beta - measures volatility relative to market',
 		routing: {
 			request: {
 				method: 'GET',
@@ -595,7 +595,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'CORREL - Pearson Correlation Coefficient',
 		value: 'correl',
 		action: 'Calculate Correlation',
-		description: 'Pearson Correlation Coefficient ✨ BETA',
+		description: 'Pearson Correlation Coefficient',
 		routing: {
 			request: {
 				method: 'GET',
@@ -607,7 +607,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'LINEARREG - Linear Regression',
 		value: 'linearreg',
 		action: 'Calculate Linear Regression',
-		description: 'Linear Regression - trend line value ✨ BETA',
+		description: 'Linear Regression - trend line value',
 		routing: {
 			request: {
 				method: 'GET',
@@ -619,7 +619,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'LINEARREG_ANGLE - Linear Regression Angle',
 		value: 'linearreg_angle',
 		action: 'Calculate Linear Regression Angle',
-		description: 'Linear Regression Angle in degrees ✨ BETA',
+		description: 'Linear Regression Angle in degrees',
 		routing: {
 			request: {
 				method: 'GET',
@@ -643,7 +643,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'LINEARREG_SLOPE - Linear Regression Slope',
 		value: 'linearreg_slope',
 		action: 'Calculate Linear Regression Slope',
-		description: 'Linear Regression Slope ✨ BETA',
+		description: 'Linear Regression Slope',
 		routing: {
 			request: {
 				method: 'GET',
@@ -667,7 +667,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'TSF - Time Series Forecast',
 		value: 'tsf',
 		action: 'Calculate Time Series Forecast',
-		description: 'Time Series Forecast - linear regression projection ✨ BETA',
+		description: 'Time Series Forecast - linear regression projection',
 		routing: {
 			request: {
 				method: 'GET',
@@ -679,7 +679,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'VAR - Variance',
 		value: 'var',
 		action: 'Calculate Variance',
-		description: 'Variance - measures spread ✨ BETA',
+		description: 'Variance - measures spread',
 		routing: {
 			request: {
 				method: 'GET',
@@ -718,7 +718,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'HT_DCPHASE - Hilbert Transform Dominant Cycle Phase',
 		value: 'ht_dcphase',
 		action: 'Calculate HT Dominant Cycle Phase',
-		description: 'Hilbert Transform - Dominant Cycle Phase ✨ BETA',
+		description: 'Hilbert Transform - Dominant Cycle Phase',
 		routing: {
 			request: {
 				method: 'GET',
@@ -742,7 +742,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'HT_SINE - Hilbert Transform SineWave',
 		value: 'ht_sine',
 		action: 'Calculate HT SineWave',
-		description: 'Hilbert Transform - SineWave ✨ BETA',
+		description: 'Hilbert Transform - SineWave',
 		routing: {
 			request: {
 				method: 'GET',
@@ -754,7 +754,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'HT_TRENDLINE - Hilbert Transform Instantaneous Trendline',
 		value: 'ht_trendline',
 		action: 'Calculate HT Trendline',
-		description: 'Hilbert Transform - Instantaneous Trendline ✨ BETA',
+		description: 'Hilbert Transform - Instantaneous Trendline',
 		routing: {
 			request: {
 				method: 'GET',
@@ -766,7 +766,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'MEDPRICE - Median Price',
 		value: 'medprice',
 		action: 'Calculate Median Price',
-		description: 'Median Price - (High + Low) / 2 ✨ BETA',
+		description: 'Median Price - (High + Low) / 2',
 		routing: {
 			request: {
 				method: 'GET',
@@ -778,7 +778,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'MIDPOINT - Midpoint',
 		value: 'midpoint',
 		action: 'Calculate Midpoint',
-		description: 'Midpoint over period ✨ BETA',
+		description: 'Midpoint over period',
 		routing: {
 			request: {
 				method: 'GET',
@@ -790,7 +790,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'MIDPRICE - Midpoint Price',
 		value: 'midprice',
 		action: 'Calculate Midpoint Price',
-		description: 'Midpoint Price over period ✨ BETA',
+		description: 'Midpoint Price over period',
 		routing: {
 			request: {
 				method: 'GET',
@@ -814,7 +814,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'PIVOT_POINTS_HL - Pivot Points High/Low',
 		value: 'pivot_points_hl',
 		action: 'Calculate Pivot Points',
-		description: 'Pivot Points High/Low ✨ BETA',
+		description: 'Pivot Points High/Low',
 		routing: {
 			request: {
 				method: 'GET',
@@ -826,7 +826,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'TYPPRICE - Typical Price',
 		value: 'typprice',
 		action: 'Calculate Typical Price',
-		description: 'Typical Price - (High + Low + Close) / 3 ✨ BETA',
+		description: 'Typical Price - (High + Low + Close) / 3',
 		routing: {
 			request: {
 				method: 'GET',
@@ -838,7 +838,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'WCLPRICE - Weighted Close Price',
 		value: 'wclprice',
 		action: 'Calculate Weighted Close Price',
-		description: 'Weighted Close Price - (High + Low + 2*Close) / 4 ✨ BETA',
+		description: 'Weighted Close Price - (High + Low + 2*Close) / 4',
 		routing: {
 			request: {
 				method: 'GET',
@@ -853,7 +853,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'ACOS - Arc Cosine',
 		value: 'acos',
 		action: 'Calculate Arc Cosine',
-		description: 'Vector Trigonometric ACos ✨ BETA',
+		description: 'Vector Trigonometric ACos',
 		routing: {
 			request: {
 				method: 'GET',
@@ -865,7 +865,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'ADD - Arithmetic Add',
 		value: 'add',
 		action: 'Calculate Addition',
-		description: 'Vector Arithmetic Add ✨ BETA',
+		description: 'Vector Arithmetic Add',
 		routing: {
 			request: {
 				method: 'GET',
@@ -889,7 +889,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'ATAN - Arc Tangent',
 		value: 'atan',
 		action: 'Calculate Arc Tangent',
-		description: 'Vector Trigonometric ATan ✨ BETA',
+		description: 'Vector Trigonometric ATan',
 		routing: {
 			request: {
 				method: 'GET',
@@ -901,7 +901,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'CEIL - Ceiling',
 		value: 'ceil',
 		action: 'Calculate Ceiling',
-		description: 'Vector Ceiling ✨ BETA',
+		description: 'Vector Ceiling',
 		routing: {
 			request: {
 				method: 'GET',
@@ -925,7 +925,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'COSH - Hyperbolic Cosine',
 		value: 'cosh',
 		action: 'Calculate Hyperbolic Cosine',
-		description: 'Vector Trigonometric Cosh ✨ BETA',
+		description: 'Vector Trigonometric Cosh',
 		routing: {
 			request: {
 				method: 'GET',
@@ -949,7 +949,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'EXP - Exponential',
 		value: 'exp',
 		action: 'Calculate Exponential',
-		description: 'Vector Arithmetic Exp ✨ BETA',
+		description: 'Vector Arithmetic Exp',
 		routing: {
 			request: {
 				method: 'GET',
@@ -961,7 +961,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'FLOOR - Floor',
 		value: 'floor',
 		action: 'Calculate Floor',
-		description: 'Vector Floor ✨ BETA',
+		description: 'Vector Floor',
 		routing: {
 			request: {
 				method: 'GET',
@@ -973,7 +973,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'LN - Natural Logarithm',
 		value: 'ln',
 		action: 'Calculate Natural Log',
-		description: 'Vector Log Natural ✨ BETA',
+		description: 'Vector Log Natural',
 		routing: {
 			request: {
 				method: 'GET',
@@ -985,7 +985,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'LOG10 - Logarithm Base 10',
 		value: 'log10',
 		action: 'Calculate Log Base 10',
-		description: 'Vector Log10 ✨ BETA',
+		description: 'Vector Log10',
 		routing: {
 			request: {
 				method: 'GET',
@@ -1009,7 +1009,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'MIN - Minimum Value',
 		value: 'min',
 		action: 'Calculate Minimum',
-		description: 'Lowest value over period ✨ BETA',
+		description: 'Lowest value over period',
 		routing: {
 			request: {
 				method: 'GET',
@@ -1021,7 +1021,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'MINMAX - Min/Max Values',
 		value: 'minmax',
 		action: 'Calculate Min/Max',
-		description: 'Lowest and highest values over period ✨ BETA',
+		description: 'Lowest and highest values over period',
 		routing: {
 			request: {
 				method: 'GET',
@@ -1033,7 +1033,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'MINMAXINDEX - Min/Max Index',
 		value: 'minmaxindex',
 		action: 'Calculate Min/Max Index',
-		description: 'Index of lowest and highest values ✨ BETA',
+		description: 'Index of lowest and highest values',
 		routing: {
 			request: {
 				method: 'GET',
@@ -1045,7 +1045,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'MULT - Arithmetic Multiplication',
 		value: 'mult',
 		action: 'Calculate Multiplication',
-		description: 'Vector Arithmetic Mult ✨ BETA',
+		description: 'Vector Arithmetic Mult',
 		routing: {
 			request: {
 				method: 'GET',
@@ -1057,7 +1057,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'ROUND - Round',
 		value: 'round',
 		action: 'Calculate Round',
-		description: 'Vector Round ✨ BETA',
+		description: 'Vector Round',
 		routing: {
 			request: {
 				method: 'GET',
@@ -1081,7 +1081,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'SINH - Hyperbolic Sine',
 		value: 'sinh',
 		action: 'Calculate Hyperbolic Sine',
-		description: 'Vector Trigonometric Sinh ✨ BETA',
+		description: 'Vector Trigonometric Sinh',
 		routing: {
 			request: {
 				method: 'GET',
@@ -1093,7 +1093,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'SQRT - Square Root',
 		value: 'sqrt',
 		action: 'Calculate Square Root',
-		description: 'Vector Square Root ✨ BETA',
+		description: 'Vector Square Root',
 		routing: {
 			request: {
 				method: 'GET',
@@ -1105,7 +1105,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'SUB - Arithmetic Subtraction',
 		value: 'sub',
 		action: 'Calculate Subtraction',
-		description: 'Vector Arithmetic Sub ✨ BETA',
+		description: 'Vector Arithmetic Sub',
 		routing: {
 			request: {
 				method: 'GET',
@@ -1117,7 +1117,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'SUM - Summation',
 		value: 'sum',
 		action: 'Calculate Sum',
-		description: 'Summation over period ✨ BETA',
+		description: 'Summation over period',
 		routing: {
 			request: {
 				method: 'GET',
@@ -1129,7 +1129,7 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		name: 'TAN - Tangent',
 		value: 'tan',
 		action: 'Calculate Tangent',
-		description: 'Vector Trigonometric Tan ✨ BETA',
+		description: 'Vector Trigonometric Tan',
 		routing: {
 			request: {
 				method: 'GET',
@@ -1150,6 +1150,8 @@ export const technicalIndicatorsOperations: INodePropertyOptions[] = [
 		},
 	},
 ];
+
+
 
 
 

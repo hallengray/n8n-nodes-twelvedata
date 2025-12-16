@@ -113,7 +113,7 @@ export const fundamentalsOperations: INodePropertyOptions[] = [
 		name: 'Get Fund Holders',
 		value: 'getFundHolders',
 		action: 'Get fund holders',
-		description: 'Get mutual fund ownership data ✨ BETA - Community testing needed',
+		description: 'Get mutual fund ownership data',
 		routing: {
 			request: {
 				method: 'GET',
