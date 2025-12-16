@@ -62,6 +62,7 @@ Desktop.ini
 # IDE
 .vscode/
 .idea/
+.cursorrules
 *.swp
 *.swo
 *~
