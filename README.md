@@ -78,7 +78,7 @@ For quick testing, you can use the demo API key: `demo`
 
 ### Available Operations
 
-The Twelve Data node provides access to **142 API endpoints** organized into 6 main resource categories:
+The Twelve Data node provides access to **164 API endpoints** organized into 6 main resource categories:
 
 #### Core Data (Market Data)
 - **Get Quote** - Real-time price quotes with bid, ask, open, high, low, close, volume
@@ -87,14 +87,27 @@ The Twelve Data node provides access to **142 API endpoints** organized into 6 m
 - **Get End of Day Price** - Daily closing prices for specific dates
 - **Get Exchange Rate** - Real-time currency conversion rates
 - **Currency Conversion** - Convert amounts between currencies
+- **Get Market Movers (All Markets)** - Top gainers, losers, and most active stocks
+- **Get Time Series Cross** - Cross-currency pair time series data
 
 #### Reference Data
 - **List Stocks** - Browse and filter available stock symbols
 - **List Forex Pairs** - Available currency pairs
 - **List Cryptocurrencies** - Supported crypto assets
 - **List ETFs** - Exchange-traded funds
+- **List ETFs (Extended)** - Extended ETF information
+- **List ETF Families** - ETF family classifications
+- **List ETF Types** - ETF type categories
 - **List Indices** - Market indices (S&P 500, NASDAQ, etc.)
 - **List Exchanges** - Trading venues and their details
+- **List Countries** - Available countries for market data
+- **List Intervals** - Supported time intervals
+- **List Mutual Fund Families** - Mutual fund family classifications
+- **List Mutual Fund Types** - Mutual fund type categories
+- **List Technical Indicators** - Available technical indicators
+- **List Fundamentals** - Available fundamental data types
+- **List Market Data** - Available market data types
+- **List Analysis** - Available analysis types
 - **Symbol Search** - Search for symbols by name or ticker
 - **Get Market State** - Check if markets are open or closed
 
@@ -108,14 +121,19 @@ The Twelve Data node provides access to **142 API endpoints** organized into 6 m
 - **Overlap Studies** (14): AVGPRICE, MEDPRICE, MIDPOINT, TYPPRICE, etc.
 - **Math Transform** (25): ACOS, ADD, ASIN, ATAN, COS, EXP, LN, LOG10, MAX, MIN, etc.
 
-#### Fundamentals (16 operations)
+#### Fundamentals (22 operations)
 - **Get Profile** - Company information (sector, industry, employees, description)
 - **Get Dividends** - Historical dividend payment records
+- **Get Dividends Calendar** - Upcoming dividend announcements
 - **Get Earnings** - Historical and upcoming earnings data
 - **Get Statistics** - Key financial statistics and metrics
 - **Get Balance Sheet** - Company balance sheet data
+- **Get Balance Sheet Consolidated** - Consolidated balance sheet data
 - **Get Cash Flow** - Cash flow statement data
+- **Get Cash Flow Consolidated** - Consolidated cash flow data
 - **Get Income Statement** - Income statement data
+- **Get Income Statement Consolidated** - Consolidated income statement
+- **Get Market Cap** - Market capitalization data
 - **Get Fund Holders** - Mutual fund ownership data
 - **Get Insider Transactions** - Insider buying and selling activity
 - **Get Institutional Holders** - Institutional ownership data
@@ -123,17 +141,21 @@ The Twelve Data node provides access to **142 API endpoints** organized into 6 m
 - **Get Earnings Calendar** - Upcoming earnings announcements
 - **Get IPO Calendar** - Upcoming IPO listings
 - **Get Stock Splits** - Historical stock split data
+- **Get Splits Calendar** - Upcoming stock split announcements
 - **Get Options Chain** - 🚧 Planned API endpoint
 - **Get Options Expiration** - 🚧 Planned API endpoint
 
-#### Market Intelligence (8 operations)
+#### Market Intelligence (10 operations)
 - **Get Analyst Ratings** - Consensus recommendations
+- **Get Analyst Ratings (Light)** - Lightweight analyst ratings
 - **Get Price Target** - Analyst price predictions
 - **Get Recommendations** - Recommendation trends
 - **Get Earnings Estimate** - Forward-looking earnings estimates
 - **Get Revenue Estimate** - Revenue estimates
 - **Get EPS Trend** - Earnings per share trend data
+- **Get EPS Revisions** - EPS estimate revisions
 - **Get Growth Estimates** - Growth estimates
+- **Get EDGAR Filings** - SEC filing information
 - **Get Economic Calendar** - Upcoming economic events
 
 #### Advanced (3 operations)
@@ -262,7 +284,16 @@ The following endpoints are defined in the node but not yet available in the Twe
 
 ## Version History
 
-### 0.1.0 (Current)
+### 0.2.0 (Current)
+- Added 22 new operations across multiple categories
+- **Fundamentals:** Balance Sheet Consolidated, Cash Flow Consolidated, Dividends Calendar, Income Statement Consolidated, Market Cap, Splits Calendar
+- **Core Data:** Market Movers (All Markets), Time Series Cross
+- **Reference Data:** List Countries, ETFs (Extended), ETF Families, ETF Types, Intervals, Mutual Fund Families, Mutual Fund Types, Technical Indicators, Fundamentals, Market Data, Analysis
+- **Market Intelligence:** Analyst Ratings (Light), EDGAR Filings, EPS Revisions
+- Enhanced script reliability with improved JSON validation
+- Total operations: 164 (up from 142)
+
+### 0.1.0
 - Initial release with 142+ operations across 6 resource categories
 - Support for stocks, forex, cryptocurrencies, ETFs, and indices
 - 91 technical indicators for market analysis
