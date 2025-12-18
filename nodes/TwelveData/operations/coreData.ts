@@ -580,11 +580,11 @@ export const coreDataMarketTypeParameter: INodeProperties = {
 		},
 	},
 	options: [
-		{ name: 'Stocks', value: 'stocks' },
-		{ name: 'Forex', value: 'forex' },
 		{ name: 'Crypto', value: 'crypto' },
 		{ name: 'ETFs', value: 'etf' },
+		{ name: 'Forex', value: 'forex' },
 		{ name: 'Indices', value: 'indices' },
+		{ name: 'Stocks', value: 'stocks' },
 	],
 };
 
