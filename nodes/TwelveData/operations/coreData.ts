@@ -8,8 +8,13 @@
  * - Convert Currency, Get End of Day Price, Get Exchange Rate
  * - Get Price, Get Quote, Get Time Series
  * 
- * BETA OPERATIONS (4):
- * - Get Complex Data, Get Earliest Timestamp, Get Market Movers, Get Time Series Cross
+ * BETA OPERATIONS (3):
+ * - Get Complex Data, Get Earliest Timestamp, Get Market Movers
+ * 
+ * NEW HIGH-VALUE OPERATIONS (2):
+ * - Get Market Movers (All Markets), Get Time Series Cross
+ * 
+ * TOTAL: 11 operations
  */
 
 import type { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
@@ -133,6 +138,33 @@ export const coreDataOperations: INodePropertyOptions[] = [
 			},
 		},
 	},
+	// -------------------------------------------------------------------------
+	// NEW HIGH-VALUE OPERATIONS (Phase 1 - 90% Coverage Goal)
+	// -------------------------------------------------------------------------
+	{
+		name: 'Get Market Movers (All Markets)',
+		value: 'getMarketMoversAll',
+		action: 'Get market movers for any market',
+		description: 'Get top gaining or losing securities across stocks, forex, crypto, and more',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '=/market_movers/{{$parameter.marketType}}',
+			},
+		},
+	},
+	{
+		name: 'Get Time Series Cross',
+		value: 'getTimeSeriesCross',
+		action: 'Get cross-asset time series',
+		description: 'Get time series data for multiple symbols or cross-asset analysis',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '/time_series/cross',
+			},
+		},
+	},
 ];
 
 // =============================================================================
@@ -155,7 +187,14 @@ export const coreDataSymbolParameter: INodeProperties = {
 			resource: ['coreData'],
 		},
 		hide: {
-			operation: ['getExchangeRate', 'currencyConversion', 'getMarketMovers', 'getComplexData'],
+			operation: [
+				'getExchangeRate',
+				'currencyConversion',
+				'getMarketMovers',
+				'getMarketMoversAll',
+				'getComplexData',
+				'getTimeSeriesCross',
+			],
 		},
 	},
 	routing: {
@@ -524,6 +563,83 @@ export const coreDataMarketMoversOptions: INodeProperties = {
 	],
 };
 
+/**
+ * Market Type parameter for market movers (all markets)
+ */
+export const coreDataMarketTypeParameter: INodeProperties = {
+	displayName: 'Market Type',
+	name: 'marketType',
+	type: 'options',
+	required: true,
+	default: 'stocks',
+	description: 'Type of market to get movers for',
+	displayOptions: {
+		show: {
+			resource: ['coreData'],
+			operation: ['getMarketMoversAll'],
+		},
+	},
+	options: [
+		{ name: 'Stocks', value: 'stocks' },
+		{ name: 'Forex', value: 'forex' },
+		{ name: 'Crypto', value: 'crypto' },
+		{ name: 'ETFs', value: 'etf' },
+		{ name: 'Indices', value: 'indices' },
+	],
+};
+
+/**
+ * Symbols parameter for time series cross
+ */
+export const coreDataCrossSymbolsParameter: INodeProperties = {
+	displayName: 'Symbols',
+	name: 'symbols',
+	type: 'string',
+	required: true,
+	default: '',
+	placeholder: 'e.g., AAPL,MSFT,GOOGL',
+	description: 'Comma-separated list of symbols for cross-asset analysis',
+	displayOptions: {
+		show: {
+			resource: ['coreData'],
+			operation: ['getTimeSeriesCross'],
+		},
+	},
+	routing: {
+		send: {
+			type: 'query',
+			property: 'symbols',
+		},
+	},
+};
+
+/**
+ * Direction parameter for market movers (all markets)
+ */
+export const coreDataMarketMoversAllDirectionParameter: INodeProperties = {
+	displayName: 'Direction',
+	name: 'direction',
+	type: 'options',
+	default: 'gainers',
+	description: 'Show gainers or losers',
+	displayOptions: {
+		show: {
+			resource: ['coreData'],
+			operation: ['getMarketMoversAll'],
+		},
+	},
+	options: [
+		{ name: 'Gainers', value: 'gainers' },
+		{ name: 'Losers', value: 'losers' },
+	],
+	routing: {
+		send: {
+			type: 'query',
+			property: 'direction',
+		},
+	},
+};
+
 // =============================================================================
 // EXPORT ALL CORE DATA PARAMETERS
 // =============================================================================
@@ -539,5 +655,9 @@ export const allCoreDataParameters: INodeProperties[] = [
 	coreDataComplexMethodsParameter,
 	coreDataAdditionalOptions,
 	coreDataMarketMoversOptions,
+	// New parameters for 90% coverage
+	coreDataMarketTypeParameter,
+	coreDataCrossSymbolsParameter,
+	coreDataMarketMoversAllDirectionParameter,
 ];
 

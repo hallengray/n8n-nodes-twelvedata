@@ -3,9 +3,14 @@
  * 
  * These operations provide calendars, analyst data, and performance metrics.
  * 
- * All 7 operations have been tested and are production-ready:
+ * TESTED OPERATIONS (7):
  * - Get Analyst Ratings, Get Earnings Estimate, Get EPS Trend
  * - Get Growth Estimates, Get Price Target, Get Recommendations, Get Revenue Estimate
+ * 
+ * NEW HIGH-VALUE OPERATIONS (3):
+ * - Get Analyst Ratings (Light), Get EDGAR Filings, Get EPS Revisions
+ * 
+ * TOTAL: 10 operations
  * 
  * NOTE: Economic Calendar endpoint does not exist in Twelve Data API (removed from codebase)
  */
@@ -101,6 +106,45 @@ export const marketIntelligenceOperations: INodePropertyOptions[] = [
 			},
 		},
 	},
+	// -------------------------------------------------------------------------
+	// NEW HIGH-VALUE OPERATIONS (Phase 1 - 90% Coverage Goal)
+	// -------------------------------------------------------------------------
+	{
+		name: 'Get Analyst Ratings (Light)',
+		value: 'getAnalystRatingsLight',
+		action: 'Get analyst ratings snapshot',
+		description: 'Get lightweight analyst ratings summary (faster, less data)',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '/analyst_ratings/light',
+			},
+		},
+	},
+	{
+		name: 'Get EDGAR Filings',
+		value: 'getEdgarFilings',
+		action: 'Get SEC EDGAR filings',
+		description: 'Get SEC EDGAR filing documents and reports',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '/edgar_filings/archive',
+			},
+		},
+	},
+	{
+		name: 'Get EPS Revisions',
+		value: 'getEpsRevisions',
+		action: 'Get EPS revisions',
+		description: 'Get earnings per share estimate revisions by analysts',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '/eps_revisions',
+			},
+		},
+	},
 ];
 
 // =============================================================================
@@ -186,6 +230,8 @@ export const allMarketIntelligenceParameters: INodeProperties[] = [
 	marketIntelligenceSymbolParameter,
 	marketIntelligenceOptions,
 ];
+
+
 
 
 

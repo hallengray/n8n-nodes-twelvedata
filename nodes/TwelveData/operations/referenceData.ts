@@ -11,6 +11,13 @@
  * BETA OPERATIONS (7):
  * - Get Cross Listings, Get Exchanges Schedule, Get Instrument Type
  * - List Bonds, List Commodities, List Cryptocurrency Exchanges, List Funds
+ * 
+ * NEW HIGH-VALUE OPERATIONS (11):
+ * - List Countries, List ETFs (Extended), List ETF Families, List ETF Types
+ * - List Intervals, List Mutual Fund Families, List Mutual Fund Types
+ * - List Technical Indicators, List Fundamentals, List Market Data, List Analysis
+ * 
+ * TOTAL: 26 operations
  */
 
 import type { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
@@ -203,6 +210,141 @@ export const referenceDataOperations: INodePropertyOptions[] = [
 			request: {
 				method: 'GET',
 				url: '/funds',
+			},
+		},
+	},
+	// -------------------------------------------------------------------------
+	// NEW HIGH-VALUE OPERATIONS (Phase 1 - 90% Coverage Goal)
+	// -------------------------------------------------------------------------
+	{
+		name: 'List Countries',
+		value: 'listCountries',
+		action: 'List countries',
+		description: 'Get a list of supported countries',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '/countries',
+			},
+		},
+	},
+	{
+		name: 'List ETFs (Extended)',
+		value: 'listEtfsExtended',
+		action: 'List ETFs with full details',
+		description: 'Get comprehensive list of ETFs with extended information',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '/etfs',
+			},
+		},
+	},
+	{
+		name: 'List ETF Families',
+		value: 'listEtfFamilies',
+		action: 'List ETF families',
+		description: 'Get a list of ETF families/providers',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '/etfs/family',
+			},
+		},
+	},
+	{
+		name: 'List ETF Types',
+		value: 'listEtfTypes',
+		action: 'List ETF types',
+		description: 'Get a list of ETF types/categories',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '/etfs/type',
+			},
+		},
+	},
+	{
+		name: 'List Intervals',
+		value: 'listIntervals',
+		action: 'List available intervals',
+		description: 'Get a list of available time intervals for data queries',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '/intervals',
+			},
+		},
+	},
+	{
+		name: 'List Mutual Fund Families',
+		value: 'listMutualFundFamilies',
+		action: 'List mutual fund families',
+		description: 'Get a list of mutual fund families/providers',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '/mutual_funds/family',
+			},
+		},
+	},
+	{
+		name: 'List Mutual Fund Types',
+		value: 'listMutualFundTypes',
+		action: 'List mutual fund types',
+		description: 'Get a list of mutual fund types/categories',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '/mutual_funds/type',
+			},
+		},
+	},
+	{
+		name: 'List Technical Indicators',
+		value: 'listTechnicalIndicators',
+		action: 'List technical indicators',
+		description: 'Get a list of available technical indicators',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '/technical_indicators',
+			},
+		},
+	},
+	{
+		name: 'List Fundamentals',
+		value: 'listFundamentals',
+		action: 'List fundamentals endpoints',
+		description: 'Get a list of available fundamental data endpoints',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '/fundamentals',
+			},
+		},
+	},
+	{
+		name: 'List Market Data',
+		value: 'listMarketData',
+		action: 'List market data endpoints',
+		description: 'Get a list of available market data endpoints',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '/market_data',
+			},
+		},
+	},
+	{
+		name: 'List Analysis',
+		value: 'listAnalysis',
+		action: 'List analysis endpoints',
+		description: 'Get a list of available analysis/research endpoints',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '/analysis',
 			},
 		},
 	},
@@ -505,6 +647,8 @@ export const allReferenceDataParameters: INodeProperties[] = [
 	referenceDataMarketStateOptions,
 	referenceDataExchangeScheduleOptions,
 ];
+
+
 
 
 

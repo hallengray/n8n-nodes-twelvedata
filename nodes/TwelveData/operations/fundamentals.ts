@@ -10,6 +10,12 @@
  * - Get Balance Sheet, Get Cash Flow, Get Earnings Calendar, Get Fund Holders
  * - Get Income Statement, Get Insider Transactions, Get Institutional Holders, Get IPO Calendar
  * - Get Key Executives, Get Options Chain, Get Options Expiration, Get Stock Splits
+ * 
+ * NEW HIGH-VALUE OPERATIONS (6):
+ * - Get Balance Sheet Consolidated, Get Cash Flow Consolidated, Get Dividends Calendar
+ * - Get Income Statement Consolidated, Get Market Cap, Get Splits Calendar
+ * 
+ * TOTAL: 22 operations
  */
 
 import type { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
@@ -77,7 +83,7 @@ export const fundamentalsOperations: INodePropertyOptions[] = [
 		name: 'Get Balance Sheet',
 		value: 'getBalanceSheet',
 		action: 'Get balance sheet',
-		description: 'Get company balance sheet data',
+		description: 'Get company balance sheet data ✨ BETA - Community testing needed',
 		routing: {
 			request: {
 				method: 'GET',
@@ -89,7 +95,7 @@ export const fundamentalsOperations: INodePropertyOptions[] = [
 		name: 'Get Cash Flow',
 		value: 'getCashFlow',
 		action: 'Get cash flow statement',
-		description: 'Get company cash flow statement data',
+		description: 'Get company cash flow statement data ✨ BETA - Community testing needed',
 		routing: {
 			request: {
 				method: 'GET',
@@ -113,7 +119,7 @@ export const fundamentalsOperations: INodePropertyOptions[] = [
 		name: 'Get Fund Holders',
 		value: 'getFundHolders',
 		action: 'Get fund holders',
-		description: 'Get mutual fund ownership data',
+		description: 'Get mutual fund ownership data ✨ BETA - Community testing needed',
 		routing: {
 			request: {
 				method: 'GET',
@@ -125,7 +131,7 @@ export const fundamentalsOperations: INodePropertyOptions[] = [
 		name: 'Get Income Statement',
 		value: 'getIncomeStatement',
 		action: 'Get income statement',
-		description: 'Get company income statement data',
+		description: 'Get company income statement data ✨ BETA - Community testing needed',
 		routing: {
 			request: {
 				method: 'GET',
@@ -137,7 +143,7 @@ export const fundamentalsOperations: INodePropertyOptions[] = [
 		name: 'Get Insider Transactions',
 		value: 'getInsiderTransactions',
 		action: 'Get insider transactions',
-		description: 'Get insider buying and selling activity',
+		description: 'Get insider buying and selling activity ✨ BETA - Community testing needed',
 		routing: {
 			request: {
 				method: 'GET',
@@ -149,7 +155,7 @@ export const fundamentalsOperations: INodePropertyOptions[] = [
 		name: 'Get Institutional Holders',
 		value: 'getInstitutionalHolders',
 		action: 'Get institutional holders',
-		description: 'Get institutional ownership data',
+		description: 'Get institutional ownership data ✨ BETA - Community testing needed',
 		routing: {
 			request: {
 				method: 'GET',
@@ -173,7 +179,7 @@ export const fundamentalsOperations: INodePropertyOptions[] = [
 		name: 'Get Key Executives',
 		value: 'getKeyExecutives',
 		action: 'Get key executives',
-		description: 'Get company executive and management information',
+		description: 'Get company executive and management information ✨ BETA - Community testing needed',
 		routing: {
 			request: {
 				method: 'GET',
@@ -209,11 +215,86 @@ export const fundamentalsOperations: INodePropertyOptions[] = [
 		name: 'Get Stock Splits',
 		value: 'getStockSplits',
 		action: 'Get stock splits',
-		description: 'Get historical stock split data',
+		description: 'Get historical stock split data ✨ BETA - Community testing needed',
 		routing: {
 			request: {
 				method: 'GET',
 				url: '/splits',
+			},
+		},
+	},
+	// -------------------------------------------------------------------------
+	// NEW HIGH-VALUE OPERATIONS (Phase 1 - 90% Coverage Goal)
+	// -------------------------------------------------------------------------
+	{
+		name: 'Get Balance Sheet Consolidated',
+		value: 'getBalanceSheetConsolidated',
+		action: 'Get consolidated balance sheet',
+		description: 'Get consolidated balance sheet data for companies with subsidiaries',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '/balance_sheet/consolidated',
+			},
+		},
+	},
+	{
+		name: 'Get Cash Flow Consolidated',
+		value: 'getCashFlowConsolidated',
+		action: 'Get consolidated cash flow',
+		description: 'Get consolidated cash flow statement for companies with subsidiaries',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '/cash_flow/consolidated',
+			},
+		},
+	},
+	{
+		name: 'Get Dividends Calendar',
+		value: 'getDividendsCalendar',
+		action: 'Get upcoming dividends',
+		description: 'Get calendar of upcoming dividend payments across all stocks',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '/dividends_calendar',
+			},
+		},
+	},
+	{
+		name: 'Get Income Statement Consolidated',
+		value: 'getIncomeStatementConsolidated',
+		action: 'Get consolidated income statement',
+		description: 'Get consolidated income statement for companies with subsidiaries',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '/income_statement/consolidated',
+			},
+		},
+	},
+	{
+		name: 'Get Market Cap',
+		value: 'getMarketCap',
+		action: 'Get market capitalization',
+		description: 'Get current market capitalization for a stock',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '/market_cap',
+			},
+		},
+	},
+	{
+		name: 'Get Splits Calendar',
+		value: 'getSplitsCalendar',
+		action: 'Get upcoming stock splits',
+		description: 'Get calendar of upcoming stock splits across all stocks',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '/splits_calendar',
 			},
 		},
 	},
@@ -239,7 +320,12 @@ export const fundamentalsSymbolParameter: INodeProperties = {
 			resource: ['fundamentals'],
 		},
 		hide: {
-			operation: ['getEarningsCalendar', 'getIpoCalendar'],
+			operation: [
+				'getEarningsCalendar',
+				'getIpoCalendar',
+				'getDividendsCalendar',
+				'getSplitsCalendar',
+			],
 		},
 	},
 	routing: {
@@ -262,7 +348,14 @@ export const fundamentalsPeriodParameter: INodeProperties = {
 	displayOptions: {
 		show: {
 			resource: ['fundamentals'],
-			operation: ['getIncomeStatement', 'getBalanceSheet', 'getCashFlow'],
+			operation: [
+				'getIncomeStatement',
+				'getBalanceSheet',
+				'getCashFlow',
+				'getIncomeStatementConsolidated',
+				'getBalanceSheetConsolidated',
+				'getCashFlowConsolidated',
+			],
 		},
 	},
 	options: [
@@ -344,7 +437,14 @@ export const fundamentalsAdditionalOptions: INodeProperties = {
 			resource: ['fundamentals'],
 		},
 		hide: {
-			operation: ['getEarningsCalendar', 'getIpoCalendar', 'getOptionsChain', 'getOptionsExpiration'],
+			operation: [
+				'getEarningsCalendar',
+				'getIpoCalendar',
+				'getDividendsCalendar',
+				'getSplitsCalendar',
+				'getOptionsChain',
+				'getOptionsExpiration',
+			],
 		},
 	},
 	options: [
@@ -418,7 +518,12 @@ export const fundamentalsCalendarOptions: INodeProperties = {
 	displayOptions: {
 		show: {
 			resource: ['fundamentals'],
-			operation: ['getEarningsCalendar', 'getIpoCalendar'],
+			operation: [
+				'getEarningsCalendar',
+				'getIpoCalendar',
+				'getDividendsCalendar',
+				'getSplitsCalendar',
+			],
 		},
 	},
 	options: [
