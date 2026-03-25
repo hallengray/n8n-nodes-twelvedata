@@ -272,7 +272,10 @@ Options Chain and Options Expiration data are currently only available in the [T
 
 ## Version History
 
-### 0.2.3 (Current)
+### 0.2.4 (Current)
+- Fixed peerDependency `n8n-workflow` version range changed to `*` per n8n verification requirement
+
+### 0.2.3
 - Removed 3 non-functional operations flagged by n8n verification team:
   - **Get Complex Data** (Core Data) — REST API endpoint not yet available
   - **Get Options Chain** (Fundamentals) — only available in Google Sheets Add-on
