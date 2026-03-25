@@ -1,0 +1,22 @@
+{
+  "timestamp": "2025-12-18T12:02:32.948Z",
+  "summary": {
+    "newEndpoints": 0,
+    "removedEndpoints": 0,
+    "modifiedEndpoints": 0,
+    "breakingChanges": 0,
+    "nonBreakingChanges": 0,
+    "deprecatedEndpoints": 0
+  },
+  "newEndpoints": [],
+  "removedEndpoints": [],
+  "modifiedEndpoints": [],
+  "breakingChanges": [],
+  "nonBreakingChanges": [],
+  "deprecatedEndpoints": [],
+  "newEndpointsByCategory": {},
+  "specVersions": {
+    "old": "0.0.1",
+    "new": "0.0.1"
+  }
+}

@@ -20,13 +20,13 @@
  * - Routing: How user input maps to API endpoints
  * 
  * OPERATIONS SUMMARY:
- * - Core Data: 11 operations (6 tested, 3 beta, 2 new)
- * - Reference Data: 26 operations (8 tested, 7 beta, 11 new)
- * - Fundamentals: 22 operations (4 tested, 12 beta, 6 new)
+ * - Core Data: 10 operations
+ * - Reference Data: 26 operations
+ * - Fundamentals: 20 operations
  * - Technical Indicators: 92 operations (all beta)
- * - Market Intelligence: 10 operations (7 tested, 3 new)
- * - Advanced: 3 operations (all beta)
- * - TOTAL: 164 operations (89.1% API coverage)
+ * - Market Intelligence: 10 operations
+ * - Advanced: 3 operations
+ * - TOTAL: 161 operations
  * 
  * SECURITY NOTE:
  * Error sanitization function is available in utils/errorSanitizer.ts

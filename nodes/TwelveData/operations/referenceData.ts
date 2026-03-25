@@ -1,23 +1,17 @@
 /**
  * Reference Data Operations for Twelve Data API
- * 
+ *
  * These operations provide symbol lists, exchange information, and metadata
  * for various financial instruments.
- * 
- * TESTED OPERATIONS (8):
- * - Get Market State, List Cryptocurrencies, List ETFs, List Exchanges
- * - List Forex Pairs, List Indices, List Stocks, Search Symbol
- * 
- * BETA OPERATIONS (7):
- * - Get Cross Listings, Get Exchanges Schedule, Get Instrument Type
- * - List Bonds, List Commodities, List Cryptocurrency Exchanges, List Funds
- * 
- * NEW HIGH-VALUE OPERATIONS (11):
- * - List Countries, List ETFs (Extended), List ETF Families, List ETF Types
- * - List Intervals, List Mutual Fund Families, List Mutual Fund Types
- * - List Technical Indicators, List Fundamentals, List Market Data, List Analysis
- * 
+ *
  * TOTAL: 26 operations
+ * - Get Cross Listings, Get Exchanges Schedule, Get Instrument Type, Get Market State
+ * - List Analysis, List Bonds, List Commodities, List Countries
+ * - List Cryptocurrencies, List Cryptocurrency Exchanges, List ETF Families, List ETF Types
+ * - List ETFs, List ETFs (Extended), List Exchanges, List Forex Pairs
+ * - List Fundamentals, List Funds, List Indices, List Intervals
+ * - List Market Data, List Mutual Fund Families, List Mutual Fund Types, List Stocks
+ * - List Technical Indicators, Search Symbol
  */
 
 import type { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
@@ -27,108 +21,6 @@ import type { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
 // =============================================================================
 
 export const referenceDataOperations: INodePropertyOptions[] = [
-	// -------------------------------------------------------------------------
-	// TESTED OPERATIONS (alphabetically ordered)
-	// -------------------------------------------------------------------------
-	{
-		name: 'Get Market State',
-		value: 'getMarketState',
-		action: 'Get market state',
-		description: 'Check if markets are open or closed',
-		routing: {
-			request: {
-				method: 'GET',
-				url: '/market_state',
-			},
-		},
-	},
-	{
-		name: 'List Cryptocurrencies',
-		value: 'listCryptocurrencies',
-		action: 'List cryptocurrencies',
-		description: 'Get a list of available cryptocurrency pairs',
-		routing: {
-			request: {
-				method: 'GET',
-				url: '/cryptocurrencies',
-			},
-		},
-	},
-	{
-		name: 'List ETFs',
-		value: 'listEtfs',
-		action: 'List ETFs',
-		description: 'Get a list of available ETF symbols',
-		routing: {
-			request: {
-				method: 'GET',
-				url: '/etf',
-			},
-		},
-	},
-	{
-		name: 'List Exchanges',
-		value: 'listExchanges',
-		action: 'List exchanges',
-		description: 'Get a list of available stock exchanges',
-		routing: {
-			request: {
-				method: 'GET',
-				url: '/exchanges',
-			},
-		},
-	},
-	{
-		name: 'List Forex Pairs',
-		value: 'listForexPairs',
-		action: 'List forex currency pairs',
-		description: 'Get a list of available forex currency pairs',
-		routing: {
-			request: {
-				method: 'GET',
-				url: '/forex_pairs',
-			},
-		},
-	},
-	{
-		name: 'List Indices',
-		value: 'listIndices',
-		action: 'List market indices',
-		description: 'Get a list of available market indices',
-		routing: {
-			request: {
-				method: 'GET',
-				url: '/indices',
-			},
-		},
-	},
-	{
-		name: 'List Stocks',
-		value: 'listStocks',
-		action: 'List available stocks',
-		description: 'Get a list of available stock symbols',
-		routing: {
-			request: {
-				method: 'GET',
-				url: '/stocks',
-			},
-		},
-	},
-	{
-		name: 'Search Symbol',
-		value: 'symbolSearch',
-		action: 'Search for symbols',
-		description: 'Search for symbols by name or ticker',
-		routing: {
-			request: {
-				method: 'GET',
-				url: '/symbol_search',
-			},
-		},
-	},
-	// -------------------------------------------------------------------------
-	// BETA OPERATIONS (alphabetically ordered)
-	// -------------------------------------------------------------------------
 	{
 		name: 'Get Cross Listings',
 		value: 'getCrossListings',
@@ -166,6 +58,30 @@ export const referenceDataOperations: INodePropertyOptions[] = [
 		},
 	},
 	{
+		name: 'Get Market State',
+		value: 'getMarketState',
+		action: 'Get market state',
+		description: 'Check if markets are open or closed',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '/market_state',
+			},
+		},
+	},
+	{
+		name: 'List Analysis',
+		value: 'listAnalysis',
+		action: 'List analysis endpoints',
+		description: 'Get a list of available analysis/research endpoints',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '/analysis',
+			},
+		},
+	},
+	{
 		name: 'List Bonds',
 		value: 'listBonds',
 		action: 'List bonds',
@@ -190,33 +106,6 @@ export const referenceDataOperations: INodePropertyOptions[] = [
 		},
 	},
 	{
-		name: 'List Cryptocurrency Exchanges',
-		value: 'listCryptoExchanges',
-		action: 'List cryptocurrency exchanges',
-		description: 'Get a list of available cryptocurrency exchanges',
-		routing: {
-			request: {
-				method: 'GET',
-				url: '/cryptocurrency_exchanges',
-			},
-		},
-	},
-	{
-		name: 'List Funds',
-		value: 'listFunds',
-		action: 'List mutual funds',
-		description: 'Get a list of available mutual fund symbols',
-		routing: {
-			request: {
-				method: 'GET',
-				url: '/funds',
-			},
-		},
-	},
-	// -------------------------------------------------------------------------
-	// NEW HIGH-VALUE OPERATIONS (Phase 1 - 90% Coverage Goal)
-	// -------------------------------------------------------------------------
-	{
 		name: 'List Countries',
 		value: 'listCountries',
 		action: 'List countries',
@@ -229,14 +118,26 @@ export const referenceDataOperations: INodePropertyOptions[] = [
 		},
 	},
 	{
-		name: 'List ETFs (Extended)',
-		value: 'listEtfsExtended',
-		action: 'List ETFs with full details',
-		description: 'Get comprehensive list of ETFs with extended information',
+		name: 'List Cryptocurrencies',
+		value: 'listCryptocurrencies',
+		action: 'List cryptocurrencies',
+		description: 'Get a list of available cryptocurrency pairs',
 		routing: {
 			request: {
 				method: 'GET',
-				url: '/etfs',
+				url: '/cryptocurrencies',
+			},
+		},
+	},
+	{
+		name: 'List Cryptocurrency Exchanges',
+		value: 'listCryptoExchanges',
+		action: 'List cryptocurrency exchanges',
+		description: 'Get a list of available cryptocurrency exchanges',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '/cryptocurrency_exchanges',
 			},
 		},
 	},
@@ -265,6 +166,90 @@ export const referenceDataOperations: INodePropertyOptions[] = [
 		},
 	},
 	{
+		name: 'List ETFs',
+		value: 'listEtfs',
+		action: 'List ETFs',
+		description: 'Get a list of available ETF symbols',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '/etf',
+			},
+		},
+	},
+	{
+		name: 'List ETFs (Extended)',
+		value: 'listEtfsExtended',
+		action: 'List ETFs with full details',
+		description: 'Get comprehensive list of ETFs with extended information',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '/etfs',
+			},
+		},
+	},
+	{
+		name: 'List Exchanges',
+		value: 'listExchanges',
+		action: 'List exchanges',
+		description: 'Get a list of available stock exchanges',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '/exchanges',
+			},
+		},
+	},
+	{
+		name: 'List Forex Pairs',
+		value: 'listForexPairs',
+		action: 'List forex currency pairs',
+		description: 'Get a list of available forex currency pairs',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '/forex_pairs',
+			},
+		},
+	},
+	{
+		name: 'List Fundamentals',
+		value: 'listFundamentals',
+		action: 'List fundamentals endpoints',
+		description: 'Get a list of available fundamental data endpoints',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '/fundamentals',
+			},
+		},
+	},
+	{
+		name: 'List Funds',
+		value: 'listFunds',
+		action: 'List mutual funds',
+		description: 'Get a list of available mutual fund symbols',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '/funds',
+			},
+		},
+	},
+	{
+		name: 'List Indices',
+		value: 'listIndices',
+		action: 'List market indices',
+		description: 'Get a list of available market indices',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '/indices',
+			},
+		},
+	},
+	{
 		name: 'List Intervals',
 		value: 'listIntervals',
 		action: 'List available intervals',
@@ -273,6 +258,18 @@ export const referenceDataOperations: INodePropertyOptions[] = [
 			request: {
 				method: 'GET',
 				url: '/intervals',
+			},
+		},
+	},
+	{
+		name: 'List Market Data',
+		value: 'listMarketData',
+		action: 'List market data endpoints',
+		description: 'Get a list of available market data endpoints',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '/market_data',
 			},
 		},
 	},
@@ -301,6 +298,18 @@ export const referenceDataOperations: INodePropertyOptions[] = [
 		},
 	},
 	{
+		name: 'List Stocks',
+		value: 'listStocks',
+		action: 'List available stocks',
+		description: 'Get a list of available stock symbols',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '/stocks',
+			},
+		},
+	},
+	{
 		name: 'List Technical Indicators',
 		value: 'listTechnicalIndicators',
 		action: 'List technical indicators',
@@ -313,38 +322,14 @@ export const referenceDataOperations: INodePropertyOptions[] = [
 		},
 	},
 	{
-		name: 'List Fundamentals',
-		value: 'listFundamentals',
-		action: 'List fundamentals endpoints',
-		description: 'Get a list of available fundamental data endpoints',
+		name: 'Search Symbol',
+		value: 'symbolSearch',
+		action: 'Search for symbols',
+		description: 'Search for symbols by name or ticker',
 		routing: {
 			request: {
 				method: 'GET',
-				url: '/fundamentals',
-			},
-		},
-	},
-	{
-		name: 'List Market Data',
-		value: 'listMarketData',
-		action: 'List market data endpoints',
-		description: 'Get a list of available market data endpoints',
-		routing: {
-			request: {
-				method: 'GET',
-				url: '/market_data',
-			},
-		},
-	},
-	{
-		name: 'List Analysis',
-		value: 'listAnalysis',
-		action: 'List analysis endpoints',
-		description: 'Get a list of available analysis/research endpoints',
-		routing: {
-			request: {
-				method: 'GET',
-				url: '/analysis',
+				url: '/symbol_search',
 			},
 		},
 	},

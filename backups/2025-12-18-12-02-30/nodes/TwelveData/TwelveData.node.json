@@ -1,0 +1,61 @@
+{
+	"node": "n8n-nodes-base.twelveData",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Finance & Accounting"],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "https://twelvedata.com/docs"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "https://twelvedata.com/docs"
+			}
+		]
+	},
+	"alias": [
+		"stock",
+		"stocks",
+		"forex",
+		"crypto",
+		"cryptocurrency",
+		"market",
+		"trading",
+		"finance",
+		"financial",
+		"price",
+		"quote",
+		"ticker",
+		"exchange",
+		"currency",
+		"etf",
+		"index",
+		"indices",
+		"twelve data",
+		"twelvedata",
+		"market data",
+		"stock price",
+		"stock quote",
+		"bitcoin",
+		"ethereum"
+	],
+	"subcategories": {
+		"Finance & Accounting": ["Financial Services"]
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

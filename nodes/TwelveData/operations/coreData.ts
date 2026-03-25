@@ -1,20 +1,13 @@
 /**
  * Core Data Operations for Twelve Data API
- * 
+ *
  * These operations provide real-time and historical price data including
  * quotes, time series, OHLC, and exchange rates.
- * 
- * TESTED OPERATIONS (6):
- * - Convert Currency, Get End of Day Price, Get Exchange Rate
- * - Get Price, Get Quote, Get Time Series
- * 
- * BETA OPERATIONS (3):
- * - Get Complex Data, Get Earliest Timestamp, Get Market Movers
- * 
- * NEW HIGH-VALUE OPERATIONS (2):
- * - Get Market Movers (All Markets), Get Time Series Cross
- * 
- * TOTAL: 11 operations
+ *
+ * TOTAL: 10 operations
+ * - Convert Currency, Get Earliest Timestamp, Get End of Day Price
+ * - Get Exchange Rate, Get Market Movers, Get Market Movers (All Markets)
+ * - Get Price, Get Quote, Get Time Series, Get Time Series Cross
  */
 
 import type { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
@@ -24,9 +17,6 @@ import type { INodeProperties, INodePropertyOptions } from 'n8n-workflow';
 // =============================================================================
 
 export const coreDataOperations: INodePropertyOptions[] = [
-	// -------------------------------------------------------------------------
-	// TESTED OPERATIONS (alphabetically ordered)
-	// -------------------------------------------------------------------------
 	{
 		name: 'Convert Currency',
 		value: 'currencyConversion',
@@ -36,6 +26,18 @@ export const coreDataOperations: INodePropertyOptions[] = [
 			request: {
 				method: 'GET',
 				url: '/currency_conversion',
+			},
+		},
+	},
+	{
+		name: 'Get Earliest Timestamp',
+		value: 'getEarliestTimestamp',
+		action: 'Get earliest available timestamp',
+		description: 'Get the earliest available data timestamp for a symbol',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '/earliest_timestamp',
 			},
 		},
 	},
@@ -60,6 +62,30 @@ export const coreDataOperations: INodePropertyOptions[] = [
 			request: {
 				method: 'GET',
 				url: '/exchange_rate',
+			},
+		},
+	},
+	{
+		name: 'Get Market Movers',
+		value: 'getMarketMovers',
+		action: 'Get market movers (gainers/losers)',
+		description: 'Get top gaining or losing stocks',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '/market_movers/stocks',
+			},
+		},
+	},
+	{
+		name: 'Get Market Movers (All Markets)',
+		value: 'getMarketMoversAll',
+		action: 'Get market movers for any market',
+		description: 'Get top gaining or losing securities across stocks, forex, crypto, and more',
+		routing: {
+			request: {
+				method: 'GET',
+				url: '=/market_movers/{{$parameter.marketType}}',
 			},
 		},
 	},
@@ -96,60 +122,6 @@ export const coreDataOperations: INodePropertyOptions[] = [
 			request: {
 				method: 'GET',
 				url: '/time_series',
-			},
-		},
-	},
-	// -------------------------------------------------------------------------
-	// BETA OPERATIONS (alphabetically ordered)
-	// -------------------------------------------------------------------------
-	{
-		name: 'Get Complex Data',
-		value: 'getComplexData',
-		action: 'Get complex data for multiple symbols',
-		description: '🚧 PLANNED API ENDPOINT - Not yet available in REST API. Expected in future Twelve Data API release.',
-		routing: {
-			request: {
-				method: 'GET',
-				url: '/complex_data',
-			},
-		},
-	},
-	{
-		name: 'Get Earliest Timestamp',
-		value: 'getEarliestTimestamp',
-		action: 'Get earliest available timestamp',
-		description: 'Get the earliest available data timestamp for a symbol',
-		routing: {
-			request: {
-				method: 'GET',
-				url: '/earliest_timestamp',
-			},
-		},
-	},
-	{
-		name: 'Get Market Movers',
-		value: 'getMarketMovers',
-		action: 'Get market movers (gainers/losers)',
-		description: 'Get top gaining or losing stocks ✨ BETA - Community testing needed',
-		routing: {
-			request: {
-				method: 'GET',
-				url: '/market_movers/stocks',
-			},
-		},
-	},
-	// -------------------------------------------------------------------------
-	// NEW HIGH-VALUE OPERATIONS (Phase 1 - 90% Coverage Goal)
-	// -------------------------------------------------------------------------
-	{
-		name: 'Get Market Movers (All Markets)',
-		value: 'getMarketMoversAll',
-		action: 'Get market movers for any market',
-		description: 'Get top gaining or losing securities across stocks, forex, crypto, and more',
-		routing: {
-			request: {
-				method: 'GET',
-				url: '=/market_movers/{{$parameter.marketType}}',
 			},
 		},
 	},
@@ -192,7 +164,6 @@ export const coreDataSymbolParameter: INodeProperties = {
 				'currencyConversion',
 				'getMarketMovers',
 				'getMarketMoversAll',
-				'getComplexData',
 				'getTimeSeriesCross',
 			],
 		},
@@ -339,56 +310,6 @@ export const coreDataMarketMoverDirectionParameter: INodeProperties = {
 };
 
 /**
- * Complex Data Symbols parameter (multiple symbols)
- */
-export const coreDataComplexSymbolsParameter: INodeProperties = {
-	displayName: 'Symbols',
-	name: 'symbols',
-	type: 'string',
-	required: true,
-	default: '',
-	placeholder: 'e.g., AAPL,MSFT,GOOGL',
-	description: 'Comma-separated list of symbols',
-	displayOptions: {
-		show: {
-			resource: ['coreData'],
-			operation: ['getComplexData'],
-		},
-	},
-	routing: {
-		send: {
-			type: 'query',
-			property: 'symbols',
-		},
-	},
-};
-
-/**
- * Complex Data Methods parameter
- */
-export const coreDataComplexMethodsParameter: INodeProperties = {
-	displayName: 'Methods',
-	name: 'methods',
-	type: 'string',
-	required: true,
-	default: 'time_series',
-	placeholder: 'e.g., time_series,quote',
-	description: 'Comma-separated list of methods to retrieve',
-	displayOptions: {
-		show: {
-			resource: ['coreData'],
-			operation: ['getComplexData'],
-		},
-	},
-	routing: {
-		send: {
-			type: 'query',
-			property: 'methods',
-		},
-	},
-};
-
-/**
  * Additional options for core data operations
  */
 export const coreDataAdditionalOptions: INodeProperties = {
@@ -400,7 +321,7 @@ export const coreDataAdditionalOptions: INodeProperties = {
 	displayOptions: {
 		show: {
 			resource: ['coreData'],
-			operation: ['getTimeSeries', 'getQuote', 'getPrice', 'getEod', 'getComplexData'],
+			operation: ['getTimeSeries', 'getQuote', 'getPrice', 'getEod'],
 		},
 	},
 	options: [
@@ -651,13 +572,9 @@ export const allCoreDataParameters: INodeProperties[] = [
 	coreDataAmountParameter,
 	coreDataIntervalParameter,
 	coreDataMarketMoverDirectionParameter,
-	coreDataComplexSymbolsParameter,
-	coreDataComplexMethodsParameter,
 	coreDataAdditionalOptions,
 	coreDataMarketMoversOptions,
-	// New parameters for 90% coverage
 	coreDataMarketTypeParameter,
 	coreDataCrossSymbolsParameter,
 	coreDataMarketMoversAllDirectionParameter,
 ];
-

@@ -78,7 +78,7 @@ For quick testing, you can use the demo API key: `demo`
 
 ### Available Operations
 
-The Twelve Data node provides access to **164 API endpoints** organized into 6 main resource categories:
+The Twelve Data node provides access to **161 API endpoints** organized into 6 main resource categories:
 
 #### Core Data (Market Data)
 - **Get Quote** - Real-time price quotes with bid, ask, open, high, low, close, volume
@@ -121,29 +121,27 @@ The Twelve Data node provides access to **164 API endpoints** organized into 6 m
 - **Overlap Studies** (14): AVGPRICE, MEDPRICE, MIDPOINT, TYPPRICE, etc.
 - **Math Transform** (25): ACOS, ADD, ASIN, ATAN, COS, EXP, LN, LOG10, MAX, MIN, etc.
 
-#### Fundamentals (22 operations)
-- **Get Profile** - Company information (sector, industry, employees, description)
-- **Get Dividends** - Historical dividend payment records
-- **Get Dividends Calendar** - Upcoming dividend announcements
-- **Get Earnings** - Historical and upcoming earnings data
-- **Get Statistics** - Key financial statistics and metrics
+#### Fundamentals (20 operations)
 - **Get Balance Sheet** - Company balance sheet data
 - **Get Balance Sheet Consolidated** - Consolidated balance sheet data
 - **Get Cash Flow** - Cash flow statement data
 - **Get Cash Flow Consolidated** - Consolidated cash flow data
+- **Get Dividends** - Historical dividend payment records
+- **Get Dividends Calendar** - Upcoming dividend announcements
+- **Get Earnings** - Historical and upcoming earnings data
+- **Get Earnings Calendar** - Upcoming earnings announcements
+- **Get Fund Holders** - Mutual fund ownership data
 - **Get Income Statement** - Income statement data
 - **Get Income Statement Consolidated** - Consolidated income statement
-- **Get Market Cap** - Market capitalization data
-- **Get Fund Holders** - Mutual fund ownership data
 - **Get Insider Transactions** - Insider buying and selling activity
 - **Get Institutional Holders** - Institutional ownership data
-- **Get Key Executives** - Company executive information
-- **Get Earnings Calendar** - Upcoming earnings announcements
 - **Get IPO Calendar** - Upcoming IPO listings
-- **Get Stock Splits** - Historical stock split data
+- **Get Key Executives** - Company executive information
+- **Get Market Cap** - Market capitalization data
+- **Get Profile** - Company information (sector, industry, employees, description)
 - **Get Splits Calendar** - Upcoming stock split announcements
-- **Get Options Chain** - 🚧 Planned API endpoint
-- **Get Options Expiration** - 🚧 Planned API endpoint
+- **Get Statistics** - Key financial statistics and metrics
+- **Get Stock Splits** - Historical stock split data
 
 #### Market Intelligence (10 operations)
 - **Get Analyst Ratings** - Consensus recommendations
@@ -243,19 +241,9 @@ Twelve Data offers different subscription tiers. The connector works with all ti
 - Higher rate limits
 - Extended historical data
 
-### Planned Endpoints (Not Yet in REST API)
+### Options Data
 
-The following endpoints are defined in the node but not yet available in the Twelve Data REST API. They're included for future compatibility:
-
-- **Get Options Chain** - Options contract data (available in Google Sheets Add-on)
-- **Get Options Expiration** - Options expiration dates (available in Google Sheets Add-on)
-- **Get Complex Data** - Multi-symbol, multi-endpoint requests
-
-**Status:** These endpoints are expected to be added to the REST API in a future release. The operations are ready in the connector and will work automatically when Twelve Data makes them available.
-
-**Current Workarounds:**
-- For options data: Use the [Twelve Data Google Sheets Add-on](https://support.twelvedata.com/en/articles/5702399-google-sheets-add-on-documentation)
-- For complex data: Make separate API calls using n8n loops (works well for most use cases)
+Options Chain and Options Expiration data are currently only available in the [Twelve Data Google Sheets Add-on](https://support.twelvedata.com/en/articles/5702399-google-sheets-add-on-documentation) and not exposed via the REST API. These operations will be added to this node once Twelve Data makes them available in the REST API.
 
 ### Interval Limitations
 
@@ -284,13 +272,21 @@ The following endpoints are defined in the node but not yet available in the Twe
 
 ## Version History
 
-### 0.2.0 (Current)
+### 0.2.3 (Current)
+- Removed 3 non-functional operations flagged by n8n verification team:
+  - **Get Complex Data** (Core Data) — REST API endpoint not yet available
+  - **Get Options Chain** (Fundamentals) — only available in Google Sheets Add-on
+  - **Get Options Expiration** (Fundamentals) — only available in Google Sheets Add-on
+- Sorted all operation lists alphabetically per n8n UX guidelines
+- Added GitHub Actions publish workflow with npm provenance (required from May 2026)
+- Total operations: 161
+
+### 0.2.0
 - Added 22 new operations across multiple categories
 - **Fundamentals:** Balance Sheet Consolidated, Cash Flow Consolidated, Dividends Calendar, Income Statement Consolidated, Market Cap, Splits Calendar
 - **Core Data:** Market Movers (All Markets), Time Series Cross
 - **Reference Data:** List Countries, ETFs (Extended), ETF Families, ETF Types, Intervals, Mutual Fund Families, Mutual Fund Types, Technical Indicators, Fundamentals, Market Data, Analysis
 - **Market Intelligence:** Analyst Ratings (Light), EDGAR Filings, EPS Revisions
-- Enhanced script reliability with improved JSON validation
 - Total operations: 164 (up from 142)
 
 ### 0.1.0

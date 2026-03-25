@@ -1,0 +1,16 @@
+Backup created: Thu, Dec 18, 2025 10:45:52 AM
+Timestamp: 2025-12-18-10-45-48
+Project: Twelve Data n8n Connector
+
+Contents:
+total 3036
+drwxr-xr-x 1 halle 197610       0 Dec 18 10:45 .
+drwxr-xr-x 1 halle 197610       0 Dec 18 10:45 ..
+drwxr-xr-x 1 halle 197610       0 Dec 18 10:45 credentials
+-rw-r--r-- 1 halle 197610       0 Dec 18 10:45 MANIFEST.txt
+drwxr-xr-x 1 halle 197610       0 Dec 18 10:45 nodes
+-rw-r--r-- 1 halle 197610 3097407 Dec 18 10:45 openapi-spec.json
+-rw-r--r-- 1 halle 197610    1490 Dec 18 10:45 package.json
+
+To restore this backup, run:
+./scripts/manage-backups.sh --restore 2025-12-18-10-45-48

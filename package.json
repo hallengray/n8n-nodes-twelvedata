@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-twelve-data",
-	"version": "0.2.0",
+	"version": "0.2.3",
 	"description": "n8n community node for Twelve Data API - Access financial market data for stocks, forex, crypto, ETFs, and more",
 	"license": "MIT",
 	"homepage": "https://github.com/hallengray/n8n-nodes-twelvedata",
@@ -57,10 +57,10 @@
 	},
 	"devDependencies": {
 		"@n8n/node-cli": "*",
-		"eslint": "9.39.1",
-		"n8n-workflow": "^1.120.0",
-		"prettier": "3.7.3",
-		"release-it": "^19.0.6",
+		"eslint": "9.39.2",
+		"n8n-workflow": "^1.120.4",
+		"prettier": "3.7.4",
+		"release-it": "^19.2.3",
 		"typescript": "5.9.3"
 	},
 	"peerDependencies": {
