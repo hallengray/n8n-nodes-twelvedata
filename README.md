@@ -272,7 +272,10 @@ Options Chain and Options Expiration data are currently only available in the [T
 
 ## Version History
 
-### 0.2.4 (Current)
+### 0.2.5 (Current)
+- Documentation updates: synced version references, operation counts, and version history across all docs
+
+### 0.2.4
 - Fixed peerDependency `n8n-workflow` version range changed to `*` per n8n verification requirement
 
 ### 0.2.3

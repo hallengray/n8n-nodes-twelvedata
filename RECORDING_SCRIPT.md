@@ -2,7 +2,7 @@
 
 **Duration:** 15-20 minutes  
 **Date:** December 18, 2024  
-**Version:** 0.2.4 (161 operations, 87.5% API coverage)
+**Version:** 0.2.5 (161 operations, 87.5% API coverage)
 
 ---
 
