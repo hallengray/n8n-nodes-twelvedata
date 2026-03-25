@@ -61,6 +61,11 @@ pnpm-debug.log*
 .n8n/
 n8n-local/
 
+# Local development backups and reports (not for version control)
+backups/
+change-report-*.json
+regeneration.log
+
 # Private client documentation (not for public GitHub)
 CLIENT_HANDOVER.md
 CLIENT_REGENERATION_GUIDE.md
